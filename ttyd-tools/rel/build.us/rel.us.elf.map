@@ -103,6 +103,28 @@ Discarded input sections
                 0x0000000000000000        0x4 mod.o
  .text._ZN3mod12infinite_pit3Mod4DrawEv
                 0x0000000000000000        0x4 mod.o
+ .text          0x0000000000000000        0x0 mod_debug.o
+ .data          0x0000000000000000        0x0 mod_debug.o
+ .bss           0x0000000000000000        0x0 mod_debug.o
+ .text._ZN3mod12infinite_pit12DebugManager6UpdateEv
+                0x0000000000000000      0x488 mod_debug.o
+ .rodata._ZN3mod12infinite_pit12DebugManager4DrawEv.str1.1
+                0x0000000000000000       0xc9 mod_debug.o
+ .text._ZN3mod12infinite_pit12DebugManager4DrawEv
+                0x0000000000000000      0x330 mod_debug.o
+ .rodata._ZN3mod12infinite_pit12DebugManager4DrawEv
+                0x0000000000000000       0x14 mod_debug.o
+ .text._ZN3mod12infinite_pit12DebugManager10ChangeModeEv
+                0x0000000000000000       0x28 mod_debug.o
+ .text._ZN3mod12infinite_pit12DebugManager10GetEnemiesEv
+                0x0000000000000000       0x30 mod_debug.o
+ .data._ZN3mod12infinite_pit12_GLOBAL__N_114g_DebugEnemiesE
+                0x0000000000000000       0x14 mod_debug.o
+ .bss._ZN3mod12infinite_pit12_GLOBAL__N_111g_CursorPosE
+                0x0000000000000000        0x4 mod_debug.o
+ .data._ZN3mod12infinite_pit12_GLOBAL__N_111g_DebugModeE
+                0x0000000000000000        0x4 mod_debug.o
+ .rodata.cst4   0x0000000000000000       0x30 mod_debug.o
  .text          0x0000000000000000        0x0 patch.o
  .data          0x0000000000000000        0x0 patch.o
  .bss           0x0000000000000000        0x0 patch.o
@@ -480,6 +502,8 @@ Linker script and memory map
                                          0xcc (size before relaxing)
  .eh_frame      0x00000000800033bc       0x80 mod.o
                                          0xd0 (size before relaxing)
+ .eh_frame      0x000000008000343c        0x0 mod_debug.o
+                                         0xc8 (size before relaxing)
  .eh_frame      0x000000008000343c       0x64 patch.o
                                         0x150 (size before relaxing)
  .eh_frame      0x00000000800034a0       0x7c rel.o
@@ -594,25 +618,28 @@ Linker script and memory map
 .stab.indexstr
  *(.stab.indexstr)
 
-.comment        0x0000000000000000      0x1b0
+.comment        0x0000000000000000      0x1d4
  *(.comment)
  .comment       0x0000000000000000       0x24 common_functions.o
  .comment       0x0000000000000024       0x24 common_ui.o
  .comment       0x0000000000000048       0x24 cxx.o
  .comment       0x000000000000006c       0x24 keyboard.o
  .comment       0x0000000000000090       0x24 mod.o
- .comment       0x00000000000000b4       0x24 patch.o
- .comment       0x00000000000000d8       0x24 rel.o
- .comment       0x00000000000000fc       0x24 c:/devkitpro/devkitppc/bin/../lib/gcc/powerpc-eabi/12.1.0\libgcc.a(_lshrdi3.o)
- .comment       0x0000000000000120       0x24 c:/devkitpro/devkitppc/bin/../lib/gcc/powerpc-eabi/12.1.0\libgcc.a(_divdi3.o)
- .comment       0x0000000000000144       0x24 c:/devkitpro/devkitppc/bin/../lib/gcc/powerpc-eabi/12.1.0\libgcc.a(_moddi3.o)
- .comment       0x0000000000000168       0x24 c:/devkitpro/devkitppc/bin/../lib/gcc/powerpc-eabi/12.1.0\libgcc.a(_udivdi3.o)
- .comment       0x000000000000018c       0x24 c:/devkitpro/devkitppc/bin/../lib/gcc/powerpc-eabi/12.1.0\libgcc.a(_umoddi3.o)
+ .comment       0x00000000000000b4       0x24 mod_debug.o
+ .comment       0x00000000000000d8       0x24 patch.o
+ .comment       0x00000000000000fc       0x24 rel.o
+ .comment       0x0000000000000120       0x24 c:/devkitpro/devkitppc/bin/../lib/gcc/powerpc-eabi/12.1.0\libgcc.a(_lshrdi3.o)
+ .comment       0x0000000000000144       0x24 c:/devkitpro/devkitppc/bin/../lib/gcc/powerpc-eabi/12.1.0\libgcc.a(_divdi3.o)
+ .comment       0x0000000000000168       0x24 c:/devkitpro/devkitppc/bin/../lib/gcc/powerpc-eabi/12.1.0\libgcc.a(_moddi3.o)
+ .comment       0x000000000000018c       0x24 c:/devkitpro/devkitppc/bin/../lib/gcc/powerpc-eabi/12.1.0\libgcc.a(_udivdi3.o)
+ .comment       0x00000000000001b0       0x24 c:/devkitpro/devkitppc/bin/../lib/gcc/powerpc-eabi/12.1.0\libgcc.a(_umoddi3.o)
 
 .gnu.attributes
                 0x0000000000000000       0x10
  .gnu.attributes
                 0x0000000000000000       0x10 common_ui.o
+ .gnu.attributes
+                0x0000000000000010       0x10 mod_debug.o
 
 .debug
  *(.debug)
@@ -626,7 +653,7 @@ Linker script and memory map
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x0000000000000000      0x238
+.debug_aranges  0x0000000000000000      0x270
  *(.debug_aranges)
  .debug_aranges
                 0x0000000000000000       0x88 common_functions.o
@@ -639,55 +666,61 @@ Linker script and memory map
  .debug_aranges
                 0x0000000000000148       0x58 mod.o
  .debug_aranges
-                0x00000000000001a0       0x68 patch.o
+                0x00000000000001a0       0x38 mod_debug.o
  .debug_aranges
-                0x0000000000000208       0x30 rel.o
+                0x00000000000001d8       0x68 patch.o
+ .debug_aranges
+                0x0000000000000240       0x30 rel.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x0000000000000000     0x6022
+.debug_info     0x0000000000000000     0x90cb
  *(.debug_info)
  .debug_info    0x0000000000000000     0x228c common_functions.o
  .debug_info    0x000000000000228c      0xed9 common_ui.o
  .debug_info    0x0000000000003165      0x364 cxx.o
  .debug_info    0x00000000000034c9      0xeab keyboard.o
  .debug_info    0x0000000000004374      0xf95 mod.o
- .debug_info    0x0000000000005309      0xc16 patch.o
- .debug_info    0x0000000000005f1f      0x103 rel.o
+ .debug_info    0x0000000000005309     0x30a9 mod_debug.o
+ .debug_info    0x00000000000083b2      0xc16 patch.o
+ .debug_info    0x0000000000008fc8      0x103 rel.o
 
-.debug_abbrev   0x0000000000000000     0x136c
+.debug_abbrev   0x0000000000000000     0x1940
  *(.debug_abbrev)
  .debug_abbrev  0x0000000000000000      0x489 common_functions.o
  .debug_abbrev  0x0000000000000489      0x2f7 common_ui.o
  .debug_abbrev  0x0000000000000780      0x170 cxx.o
  .debug_abbrev  0x00000000000008f0      0x374 keyboard.o
  .debug_abbrev  0x0000000000000c64      0x460 mod.o
- .debug_abbrev  0x00000000000010c4      0x1b8 patch.o
- .debug_abbrev  0x000000000000127c       0xf0 rel.o
+ .debug_abbrev  0x00000000000010c4      0x5d4 mod_debug.o
+ .debug_abbrev  0x0000000000001698      0x1b8 patch.o
+ .debug_abbrev  0x0000000000001850       0xf0 rel.o
 
-.debug_line     0x0000000000000000     0x1d18
+.debug_line     0x0000000000000000     0x2779
  *(.debug_line)
  .debug_line    0x0000000000000000      0x752 common_functions.o
  .debug_line    0x0000000000000752      0x527 common_ui.o
  .debug_line    0x0000000000000c79      0x1ed cxx.o
  .debug_line    0x0000000000000e66      0x573 keyboard.o
  .debug_line    0x00000000000013d9      0x412 mod.o
- .debug_line    0x00000000000017eb      0x3d6 patch.o
- .debug_line    0x0000000000001bc1      0x157 rel.o
+ .debug_line    0x00000000000017eb      0xa61 mod_debug.o
+ .debug_line    0x000000000000224c      0x3d6 patch.o
+ .debug_line    0x0000000000002622      0x157 rel.o
 
 .debug_frame
  *(.debug_frame)
 
-.debug_str      0x0000000000000000     0x3c2c
+.debug_str      0x0000000000000000     0x69fa
  *(.debug_str)
  .debug_str     0x0000000000000000     0x125d common_functions.o
  .debug_str     0x000000000000125d      0x75c common_ui.o
  .debug_str     0x00000000000019b9      0x372 cxx.o
  .debug_str     0x0000000000001d2b      0x9fb keyboard.o
  .debug_str     0x0000000000002726      0xcba mod.o
- .debug_str     0x00000000000033e0      0x697 patch.o
- .debug_str     0x0000000000003a77      0x1b5 rel.o
+ .debug_str     0x00000000000033e0     0x2dce mod_debug.o
+ .debug_str     0x00000000000061ae      0x697 patch.o
+ .debug_str     0x0000000000006845      0x1b5 rel.o
 
 .debug_loc
  *(.debug_loc)
@@ -733,6 +766,7 @@ LOAD common_ui.o
 LOAD cxx.o
 LOAD keyboard.o
 LOAD mod.o
+LOAD mod_debug.o
 LOAD patch.o
 LOAD rel.o
 LOAD action_menu_patches.o
@@ -761,7 +795,7 @@ LOAD c:/devkitpro/devkitppc/bin/../lib/gcc/powerpc-eabi/12.1.0\libgcc.a
 OUTPUT(C:/Users/Rainchus/Desktop/TTYD_Modding/ttyd-tools/rel/rel.us.elf elf32-powerpc)
 
 .debug_loclists
-                0x0000000000000000      0xe60
+                0x0000000000000000     0x10d5
  .debug_loclists
                 0x0000000000000000      0x3a7 common_functions.o
  .debug_loclists
@@ -773,12 +807,14 @@ OUTPUT(C:/Users/Rainchus/Desktop/TTYD_Modding/ttyd-tools/rel/rel.us.elf elf32-po
  .debug_loclists
                 0x00000000000009be       0x62 mod.o
  .debug_loclists
-                0x0000000000000a20      0x3f3 patch.o
+                0x0000000000000a20      0x275 mod_debug.o
  .debug_loclists
-                0x0000000000000e13       0x4d rel.o
+                0x0000000000000c95      0x3f3 patch.o
+ .debug_loclists
+                0x0000000000001088       0x4d rel.o
 
 .debug_rnglists
-                0x0000000000000000      0x299
+                0x0000000000000000      0x347
  .debug_rnglists
                 0x0000000000000000       0x8d common_functions.o
  .debug_rnglists
@@ -790,6 +826,8 @@ OUTPUT(C:/Users/Rainchus/Desktop/TTYD_Modding/ttyd-tools/rel/rel.us.elf elf32-po
  .debug_rnglists
                 0x00000000000001c3       0x50 mod.o
  .debug_rnglists
-                0x0000000000000213       0x49 patch.o
+                0x0000000000000213       0xae mod_debug.o
  .debug_rnglists
-                0x000000000000025c       0x3d rel.o
+                0x00000000000002c1       0x49 patch.o
+ .debug_rnglists
+                0x000000000000030a       0x3d rel.o

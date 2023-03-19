@@ -173,6 +173,7 @@ $(OFILES_SOURCES) : $(HFILES)
 %.gci: %.rel
 	@echo packing ... $(notdir $@)
 	@$(GCIPACK) $< "rel" "Paper Mario" "TTYD Infinite Pit" $(BANNERFILE) $(ICONFILE) $(GAMECODE)
+	@cp $< "C:\Users\Rainchus\Documents\Dolphin Emulator\GC\USA\Card A\01-G8ME-mariost_save_file.gci"
 	
 #---------------------------------------------------------------------------------
 # This rule links in binary data with the .jpg extension
