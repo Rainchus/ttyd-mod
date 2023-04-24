@@ -242,7 +242,9 @@ void setInitialFlags(void) {
     ttyd::swdrv::swSet(1335); //stairs before plane curse
     ttyd::swdrv::swSet(1353); //initial plane curse text
     ttyd::swdrv::swSet(1369); //skip goombella's text about not equipping power smash
-    ttyd::swdrv::swSet(254); //remove goombella explaining to equip power smash
+    // ttyd::swdrv::swSet(254); //remove goombella explaining to equip power smash
+    ttyd::swdrv::swSet(1325); //spoke to dazzle for the first time
+    ttyd::swdrv::swSet(1805); //goombella explaining her field ability in petal meadows
 
     //ttyd::swdrv::swSet(1337); //black key for plane curse flag
     //pouchGetItem give black key
@@ -287,8 +289,6 @@ void skipPeachIntermissions(void) {
             player->prevPartyId[1] = 0;
             ttyd::mario_party::partyJoin(1);
             ttyd::mario_pouch::pouchGetItem(33); //plane curse key
-            //ttyd::mario_pouch::star_powers_obtained
-            //ttyd::mario_pouch::pouchGetItem(ttyd::item_data::ItemType::DIAMOND_STAR);
             setInitialFlags();
             setNextMap("tik_19");
             reloadRoomMain();
@@ -300,9 +300,21 @@ void skipPeachIntermissions(void) {
     //if entering thousand year door room for first time
     if (mario_st->gsw0 == 15) {
         if (!strcmp(ttyd::seq_mapchange::NextMap, "tik_05")) {
-            mario_st->gsw0 = 18;
-            setInitialFlags();
-            setNextMap("gor_02");
+            mario_st->gsw0 = 20;
+            ttyd::mario_pouch::pouchGetItem(ttyd::item_data::ItemType::POWER_SMASH);
+            setNextBero("dokan_2");
+            setNextMap("tik_01");
+            reloadRoomMain();
+            return;
+        }
+    }
+
+    //entering petal meadows for the first time
+    if (mario_st->gsw0 == 21) {
+        if (!strcmp(ttyd::seq_mapchange::NextMap, "sys_01")) {
+            mario_st->gsw0 = 24;
+            setNextBero("dokan_2");
+            setNextMap("hei_00");
             reloadRoomMain();
             return;
         }
