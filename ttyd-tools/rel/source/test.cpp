@@ -13,62 +13,33 @@
 #include "ttyd/evtmgr.h"
 #include "ttyd/item_data.h"
 #include "ttyd/mario.h"
+#include "battle_patches.h"
+#include "ttyd/swdrv.h"
 
-void drawText(const char *text, int32_t x, int32_t y, uint32_t color, float scale);
-// namespace mod::infinite_pit {
-
-// // Applies all patches that only need to be applied once at initialization.
-// inline void ApplyAllFixedPatches() {
-//     core::ApplyFixedPatches();
-// }
-
-// }
-
-// extern "C" {
-//     void ApplyAllFixedPatches() { mod::infinite_pit::core::ApplyFixedPatches(); }
-//     //void onMapUnload() { mod::infinite_pit::core::OnMapUnloaded(); }
-// }
-
-
-typedef unsigned char u8;
-namespace mod {
-
-MOD_INIT_FUNCTION() {
-    mod::infinite_pit::core::ApplyFixedPatches();
-}
-
-//gsw0 = story progression
-// u8* test = (u8*)0x80312F5C;
-// *test = 4;
+enum PAD_INPUTS
+{
+    PAD_DPAD_LEFT  = 0x0001,
+    PAD_DPAD_RIGHT = 0x0002,
+    PAD_DPAD_DOWN  = 0x0004,
+    PAD_DPAD_UP    = 0x0008,
+    PAD_Z          = 0x0010,
+    PAD_R          = 0x0020,
+    PAD_L          = 0x0040,
+    // unused      = 0x0080,
+    PAD_A          = 0x0100,
+    PAD_B          = 0x0200,
+    PAD_X          = 0x0400,
+    PAD_Y          = 0x0800,
+    PAD_START      = 0x1000,
+};
 
 char DisplayBuffer[256];
+void drawText(const char *text, int32_t x, int32_t y, uint32_t color, float scale);
 
-void drawModMain(void) {
-    auto* mario_st = ttyd::mariost::g_MarioSt;
-    uint32_t color = 0x151515E0;
-    char *tempDisplayBuffer = DisplayBuffer;
-
-    sprintf(tempDisplayBuffer,"Map: %s", ttyd::seq_mapchange::NextMap);
-    DrawText(tempDisplayBuffer, -190, -150, 255, true, ~0U, 0.75f, /* alignment = center */ 4);
-
-    sprintf(tempDisplayBuffer,"Seq: %d", mario_st->gsw0);
-    DrawText(tempDisplayBuffer, -190, -165, 255, true, ~0U, 0.75f, /* alignment = center */ 4);
-
-    sprintf(tempDisplayBuffer,"Bero: %s", ttyd::seq_mapchange::NextBero);
-    DrawText(tempDisplayBuffer, -190, -180, 255, true, ~0U, 0.75f, /* alignment = center */ 4);
-}
-
-MOD_UPDATE_FUNCTION() {
-
-    // uint32_t color = 0x151515E0;
-    // float scale   = 0.6f;
-    // char *tempDisplayBuffer = DisplayBuffer;
-
-    // sprintf(tempDisplayBuffer,"Map: %s", ttyd::seq_mapchange::NextMap);
-    
-    // drawText(tempDisplayBuffer, 0, 0, color, scale);
-}
-}
+void unkMashFunc1(int);
+void unkMashFunc2(int);
+void unkMashFunc3(int);
+void reloadRoomMain(void);
 
 void setNextMap(const char *map)
 {
@@ -80,94 +51,220 @@ void setNextMap(const char *map)
     strncpy(ttyd::seq_mapchange::NextArea, tempMap, 3);
 }
 
-// void spawnPartnerOrFollower(ttyd::party::PartyMembers id)
-// {
-//     ttyd::party::PartySlotId PartySlotId;
-//     uint32_t partySlotId_u32 = static_cast<uint32_t>(PartySlotId);
-//     uint32_t id_u32 = static_cast<uint32_t>(id);
-
-//     // Make sure the partner/follower is valid
-//     if ((id <= ttyd::party::PartyMembers::kNone) || 
-//         (id >= ttyd::party::PartyMembers::kMsMowzFollower))
-//     {
-//         return;
-//     }
+void setNextBero(const char *bero)
+{
+    char tempBero[17];
+    strncpy(tempBero, bero, sizeof(tempBero) - 1);
+    tempBero[sizeof(tempBero) - 1] = '\0';
     
-    
-//     // If spawning a partner, make sure they are enabled when marioPartyEntry is called
-//     if ((id >= ttyd::party::PartyMembers::kGoombella) && 
-//         (id <= ttyd::party::PartyMembers::kMsMowz))
-//     {
-//         uint32_t PouchPtr = reinterpret_cast<uint32_t>(ttyd::mario_pouch::pouchGetPtr());
-        
-//         bool *PartnerEnabled = reinterpret_cast<bool *>(
-//             PouchPtr + (static_cast<uint32_t>(id) * 0xE) + 0x1);
-        
-//         // Preserve the current value of the enabled bool
-//         bool CurrentPartnerEnabled = *PartnerEnabled;
-        
-//         // Make sure the selected partner is enabled
-//         *PartnerEnabled = true;
-        
-//         // Spawn the partner
-//         partySlotId_u32 = ttyd::mario_party::marioPartyEntry(id_u32);
-        
-//         // Restore the value of the enabled bool
-//         *PartnerEnabled = CurrentPartnerEnabled;
-//     }
-//     else
-//     {
-//         // Spawn the follower
-//         partySlotId_u32 = ttyd::mario_party::marioPartyEntry(id_u32);
-//     }
-
-//     PartySlotId = static_cast<ttyd::party::PartySlotId>(partySlotId_u32);
-    
-//     // Make sure the partner/follower spawned properly
-//     if (PartySlotId <= ttyd::party::PartySlotId::kNone)
-//     {
-//         return;
-//     }
-    
-//     // Make sure the partner/follower is moving
-//     ttyd::party::partyRun(ttyd::party::partyGetPtr(PartySlotId));
-// }
-
-
-enum Options_v2 {
- OPT_PARTNER_RANK            = 0x1'0a'2'0'003,
-};
-
-void InitializePartyMember (int partnerIndex) {
-    const int16_t starting_hp = 10;
-    auto& party_data = ttyd::mario_pouch::pouchGetPtr()->party_data[partnerIndex];
-    party_data.base_max_hp = starting_hp;
-    party_data.max_hp = starting_hp;
-    party_data.current_hp = starting_hp;
-    party_data.hp_level = 0;
-    party_data.attack_level = 0;
-    party_data.tech_level = 0;
+    strcpy(ttyd::seq_mapchange::NextBero, tempBero);
 }
 
-void reloadRoomMain(void);
+bool checkButtonComboEveryFrame(uint32_t combo)
+{
+    uint32_t ButtonInput = ttyd::system::keyGetButton(0);
+    return (ButtonInput & combo) == combo;
+}
+
+uint32_t autoMashText(uint32_t controllerPort)
+{
+    if (!checkButtonComboEveryFrame(PAD_Y))
+    {
+        // Return the intended value
+        return ttyd::system::keyGetButtonTrg(controllerPort);
+    }
+    
+    // Return the value for B to make sure the text is being mashed through as fast as possible
+    return PAD_B;
+}
+
+// 800d4c38:pouchRemoveItem
+// 800d4ed4:pouchCheckItem
+// 800d50cc:pouchGetItem
+
+typedef unsigned char u8;
+namespace mod {
+
+void (*tempTestPtr)(int arg0) = nullptr;
+extern const int32_t swSet_BH = 0x800858FC;
+extern const int32_t swSet_EH = 0x80085900;
+
+extern const int32_t ItemRemove_BH = 0x800D4C38;
+extern const int32_t ItemRemove_EH = 0x800D4C3C;
+
+extern const int32_t ItemAdd_BH = 0x800d50CC;
+extern const int32_t ItemAdd_EH = 0x800d50D0;
+
+int32_t GSWFCopy;
+int32_t keyItemReceived;
+int32_t keyItemRemovedCopy;
+
+uint32_t GSWF_Func(uint32_t arg0) {
+    GSWFCopy = arg0;
+    return arg0;
+}
+
+uint32_t keyItemFunc(uint32_t arg0) {
+    keyItemReceived = arg0;
+    return arg0;
+}
+
+uint32_t keyItemRemoveFunc(uint32_t arg0) {
+    
+    keyItemRemovedCopy = arg0;
+    return arg0;
+}
+
+uint32_t CheckIfShouldExit(uint32_t arg0) {
+    auto* mario_st = ttyd::mariost::g_MarioSt;
+
+    //if just gave black key to plane curse chest
+    if (mario_st->gsw0 == 14) { //update to be correct (should be 14)
+        if (!strcmp(ttyd::seq_mapchange::NextMap, "tik_19")) {
+            ttyd::mario_pouch::pouchGetItem(4); //plane curse ability
+            setNextBero("n_bero_5");
+            setNextMap("tik_04");
+            reloadRoomMain();
+        }
+    }
+    return arg0;  
+}
+
+void drawModMain(void) {
+    auto* mario_st = ttyd::mariost::g_MarioSt;
+    char *tempDisplayBuffer = DisplayBuffer;
+    //struct PouchData* pouch = *ttyd:mario_pouch:pouchGetPtr();
+
+    sprintf(tempDisplayBuffer,"Added Item ID: %d", keyItemReceived);
+    DrawText(tempDisplayBuffer, -180, -105, 255, true, ~0U, 0.75f, /* alignment = center */ 4);
+
+    sprintf(tempDisplayBuffer,"Removed Item ID: %d", keyItemRemovedCopy);
+    DrawText(tempDisplayBuffer, -180, -120, 255, true, ~0U, 0.75f, /* alignment = center */ 4);
+
+    sprintf(tempDisplayBuffer,"Flag: %d", GSWFCopy);
+    DrawText(tempDisplayBuffer, -190, -135, 255, true, ~0U, 0.75f, /* alignment = center */ 4);
+
+    sprintf(tempDisplayBuffer,"Map: %s", ttyd::seq_mapchange::NextMap);
+    DrawText(tempDisplayBuffer, -190, -150, 255, true, ~0U, 0.75f, /* alignment = center */ 4);
+
+    sprintf(tempDisplayBuffer,"Seq: %d", mario_st->gsw0);
+    DrawText(tempDisplayBuffer, -190, -165, 255, true, ~0U, 0.75f, /* alignment = center */ 4);
+
+    sprintf(tempDisplayBuffer,"Bero: %s", ttyd::seq_mapchange::NextBero);
+    DrawText(tempDisplayBuffer, -190, -180, 255, true, ~0U, 0.75f, /* alignment = center */ 4);
+}
+
+// Assembly patch functions.
+extern "C" {
+    // map_change_patches.s
+    void startGSWF();
+    void endGSWF();
+    void startRemovePouch();
+    void endRemovePouch();
+    void startAddPouch();
+    void endAddPouch();
+
+    int32_t check_if_should_exit(uint32_t arg0) { return mod::CheckIfShouldExit(arg0); }
+    int32_t gswf_func(uint32_t arg0) { return mod::GSWF_Func(arg0); }
+    int32_t key_item_func_add(uint32_t arg0) { return mod::keyItemFunc(arg0); }
+    int32_t key_item_func_remove(uint32_t arg0) { return mod::keyItemRemoveFunc(arg0); }
+}
+
+MOD_INIT_FUNCTION() {
+    mod::infinite_pit::core::ApplyFixedPatches();
+    mod::infinite_pit::options::ApplyFixedPatches();
+
+    //track last global flag set
+    mod::patch::writeBranchPair(
+        reinterpret_cast<void*>(swSet_BH),
+        reinterpret_cast<void*>(swSet_EH),
+        reinterpret_cast<void*>(startGSWF),
+        reinterpret_cast<void*>(endGSWF));
+
+    //track last pouch removes
+    mod::patch::writeBranchPair(
+        reinterpret_cast<void*>(ItemRemove_BH),
+        reinterpret_cast<void*>(ItemRemove_EH),
+        reinterpret_cast<void*>(startRemovePouch),
+        reinterpret_cast<void*>(endRemovePouch));
+
+    //track last pouch adds
+    mod::patch::writeBranchPair(
+        reinterpret_cast<void*>(ItemAdd_BH),
+        reinterpret_cast<void*>(ItemAdd_EH),
+        reinterpret_cast<void*>(startAddPouch),
+        reinterpret_cast<void*>(endAddPouch));
+
+}
+
+
+
+MOD_UPDATE_FUNCTION() {
+
+}
+
+}
+
+void setInitialFlags(void) {
+    ttyd::swdrv::swSet(233); //remove initial save block text
+    ttyd::swdrv::swSet(0); //remove shop explanation text
+    ttyd::swdrv::swSet(1335); //stairs before plane curse
+    ttyd::swdrv::swSet(1353); //initial plane curse text
+
+    //ttyd::swdrv::swSet(1337); //black key for plane curse flag
+    //pouchGetItem give black key
+    //ttyd::swdrv::swSet(1352); //plane curse chest open
+}
+
+void doInitialSetup(void) {
+    ttyd::mario::Player *player = ttyd::mario::marioGetPtr();
+    auto* mario_st = ttyd::mariost::g_MarioSt;
+
+    mario_st->gsw0 = 11; //after frankly asks if you know how action commands work
+    player->prevPartyId[0] = 1;
+    player->prevPartyId[1] = 0;
+    ttyd::mario_party::partyJoin(1);
+    //ttyd::mario_pouch::pouchGetItem(33); //plane curse key
+    setInitialFlags();
+    setNextMap("gor_01");
+    reloadRoomMain();
+}
+
+#define DEBUG
 
 void skipPeachIntermissions(void) {
     ttyd::mario::Player *player = ttyd::mario::marioGetPtr();
-
     auto* mario_st = ttyd::mariost::g_MarioSt;
-    const char* area = ttyd::seq_mapchange::NextArea;
 
+    #ifndef DEBUG
+    //if opening scene
     if (mario_st->gsw0 == 0) {
         if (!strcmp(ttyd::seq_mapchange::NextMap, "aaa_00")) {
-            mario_st->gsw0 = 6;
+            doInitialSetup();
+            return;
+        }
+    }
+    #else
+    if (mario_st->gsw0 == 0) {
+        if (!strcmp(ttyd::seq_mapchange::NextMap, "aaa_00")) {
+            mario_st->gsw0 = 14; //after frankly asks if you know how action commands work
             player->prevPartyId[0] = 1;
             player->prevPartyId[1] = 0;
             ttyd::mario_party::partyJoin(1);
-            strncpy(ttyd::seq_mapchange::NextBero, "s_bero", 7);
-            setNextMap("gor_01");
+            ttyd::mario_pouch::pouchGetItem(33); //plane curse key
+            setInitialFlags();
+            setNextMap("tik_19");
             reloadRoomMain();
             return;
         }
     }
+    #endif
 
+    //if entering thousand year door room for first time
+    if (mario_st->gsw0 == 15) {
+        if (!strcmp(ttyd::seq_mapchange::NextMap, "tik_05")) {
+            mario_st->gsw0 = 16;
+            return;
+        }
+    }
 }
