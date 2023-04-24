@@ -1,0 +1,19 @@
+{
+    "version": 4,
+    "configurations": [
+        {
+            "name": "ttyd",
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true,
+                "path": [
+                    "${workspaceFolder}/ttyd-tools/rel/include/**",
+                    "${workspaceFolder}/ttyd-tools/rel/source/**"
+                ]
+            },
+            "includePath": [
+                "${workspaceFolder}/ttyd-tools/rel/include/**",
+                "${workspaceFolder}/ttyd-tools/rel/source/**"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "swdrv.h": "c",
+        "console.h": "c"
+    }
+}

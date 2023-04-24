@@ -1,26 +1,66 @@
 #pragma once
 
-#include "mod_state.h"
+#include "util.h"
+#include "console.h"
 
 #include <cstdint>
 
-namespace mod::infinite_pit {
+struct ModInitFunction
+{
+	ModInitFunction(void (*f)())
+	{
+		next = sFirst;
+		sFirst = this;
+		initFunction = f;
+	}
 
-class Mod {
-public:
-	Mod();
-    
-    // Sets up necessary hooks for the mod's code to run.
-    void Init();
-    // Code that runs every frame.
-    void Update();
-    // Code that runs drawing-related code every frame.
-    void Draw();
-    
-    // Holds state specific to the Infinite Pit mod.
-    StateManager_v2 state_;
+	ModInitFunction *next;
+	void (*initFunction)();
+
+	static ModInitFunction *sFirst;
 };
 
-extern Mod* g_Mod;
+struct ModUpdateFunction
+{
+	ModUpdateFunction(void (*f)())
+	{
+		next = sFirst;
+		sFirst = this;
+		updateFunction = f;
+	}
+
+	ModUpdateFunction *next;
+	void (*updateFunction)();
+
+	static ModUpdateFunction *sFirst;
+};
+
+#define MOD_INTERNAL_ADD_FUNCTION(type) \
+	static void MOD_ANONYMOUS(mod_if_func)(); \
+	static type MOD_ANONYMOUS(mod_if_obj)(MOD_ANONYMOUS(mod_if_func)); \
+	static void MOD_ANONYMOUS(mod_if_func)()
+
+#define MOD_INIT_FUNCTION() \
+	MOD_INTERNAL_ADD_FUNCTION(ModInitFunction)
+#define MOD_UPDATE_FUNCTION() \
+	MOD_INTERNAL_ADD_FUNCTION(ModUpdateFunction)
+
+namespace mod {
+
+class Mod
+{
+public:
+	Mod();
+	void init();
+
+private:
+	void updateEarly();
+	void draw();
+
+private:
+	void (*mPFN_makeKey_trampoline)() = nullptr;
+
+	ConsoleSystem mConsole;
+};
 
 }

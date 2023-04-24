@@ -1,90 +1,95 @@
 #include "mod.h"
 
-#include "common_ui.h"
-#include "mod_achievements.h"
-#include "mod_cheats.h"
-#include "mod_debug.h"
-#include "mod_loading.h"
-#include "mod_menu.h"
-#include "mod_title.h"
 #include "patch.h"
 
-#include <ttyd/dispdrv.h>
-#include <ttyd/fontmgr.h>
+#include <ttyd/system.h>
 #include <ttyd/mariost.h>
+#include <ttyd/fontmgr.h>
+#include <ttyd/dispdrv.h>
+#include <ttyd/seqdrv.h>
+#include <ttyd/seq_logo.h>
+#include <ttyd/mario.h>
+#include <ttyd/mapdata.h>
+#include <ttyd/npcdrv.h>
+#include <ttyd/envdrv.h>
 
-#include <cstdint>
+#include <ttyd/evtmgr.h>
+#include <ttyd/evt_map.h>
+#include <ttyd/evt_npc.h>
+#include <ttyd/evt_shop.h>
+#include <ttyd/evt_bero.h>
+
+#include <gc/os.h>
+#include <gc/demo.h>
+
+#include <cstdio>
 #include <cstring>
+
+#include "evt_cmd.h"
+
+ModInitFunction *ModInitFunction::sFirst = nullptr;
+ModUpdateFunction *ModUpdateFunction::sFirst = nullptr;
 
 namespace mod {
 
-void main() {
-	infinite_pit::Mod* mod = new infinite_pit::Mod();
-	mod->Init();
+Mod *gMod = nullptr;
+
+void main()
+{
+	Mod *mod = new Mod();
+	mod->init();
 }
 
-}
-
-namespace mod::infinite_pit {
-
-// Global instance of Mod class.
-Mod* g_Mod = nullptr;
-    
-namespace {
-    
-using ::ttyd::dispdrv::CameraId;
-    
-// Main trampoline to call once-a-frame update logic from.
-void (*marioStMain_trampoline_)() = nullptr;
-
-}
-
-void ApplyAllFixedPatches(void) {
-    
-}
-
-Mod::Mod() {}
-
-void Mod::Init() {
-    // Initialize global mod instance variable.
-	g_Mod = this;
-    
-    // Clear the mod's state completely.
-    memset(&state_, 0, sizeof(state_));
+Mod::Mod()
+{
 	
-    // Hook the game's main function, so Update runs exactly once per frame.
-	marioStMain_trampoline_ = patch::hookFunction(
-        ttyd::mariost::marioStMain, [](){
-            // Call the mod's update and draw functions, then run game code.
-            g_Mod->Update();
-            g_Mod->Draw();
-            marioStMain_trampoline_();
-        });
+}
 
-	// Initialize typesetting early (to display mod information on title screen)
+void Mod::init()
+{
+	gMod = this;
+
+	mPFN_makeKey_trampoline = patch::hookFunction(ttyd::system::makeKey, []()
+	{
+		gMod->updateEarly();
+	});
+
+	// Initialize typesetting early
 	ttyd::fontmgr::fontmgrTexSetup();
 	patch::hookFunction(ttyd::fontmgr::fontmgrTexSetup, [](){});
-    
-    // Hook / patch other functions with custom logic.
-    ApplyAllFixedPatches();
+
+	mConsole.init();
+
+	// Run spread initializations
+	for (ModInitFunction *p = ModInitFunction::sFirst; p; p = p->next)
+	{
+		p->initFunction();
+	}
 }
 
-void Mod::Update() {
-    // DebugManager::Update();
-    // LoadingManager::Update();
-    // CheatsManager::Update();
-    // AchievementsManager::Update();
-    // TitleScreenManager::Update();
-    // MenuManager::Update();
+void Mod::updateEarly()
+{
+	// Run spread update functions
+	for (ModUpdateFunction *p = ModUpdateFunction::sFirst; p; p = p->next)
+	{
+		p->updateFunction();
+	}
+
+	// Register draw command
+	ttyd::dispdrv::dispEntry(ttyd::dispdrv::CameraId::kDebug3d, 1, 0.f, [](ttyd::dispdrv::CameraId layerId, void *user)
+	{
+		reinterpret_cast<Mod *>(user)->draw();
+	}, this);
+
+	mConsole.update();
+
+	// Call original function
+	mPFN_makeKey_trampoline();
 }
 
-void Mod::Draw() {
-    // RegisterDrawCallback(DebugManager::Draw,        CameraId::kDebug3d);
-    // RegisterDrawCallback(LoadingManager::Draw,      CameraId::kDebug3d);
-    // RegisterDrawCallback(CheatsManager::Draw,       CameraId::kDebug3d);
-    // RegisterDrawCallback(AchievementsManager::Draw, CameraId::kDebug3d);
-    // RegisterDrawCallback(TitleScreenManager::Draw,  CameraId::k2d);
-    // RegisterDrawCallback(MenuManager::Draw,         CameraId::k2d);
+void Mod::draw()
+{
+
 }
 
 }
