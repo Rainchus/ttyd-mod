@@ -12,6 +12,9 @@
 #include "ttyd/item_data.h"
 #include "ttyd/memory.h"
 #include "patch.h"
+#include "mod.h"
+
+void skipPeachIntermissions(void); //from test.cpp
 
 extern const int32_t g_seq_mapChangeMain_OnMapUnload_BH = 0x80007e0c;
 extern const int32_t g_seq_mapChangeMain_MapLoad_BH = 0x80007ef0;
@@ -26,7 +29,7 @@ extern "C" {
     void BranchBackOnMapUnload();
     
     int32_t mapLoad() { return mod::infinite_pit::core::LoadMap(); }
-    //void onMapUnload() { mod::infinite_pit::core::OnMapUnloaded(); }
+    void onMapUnload() { mod::infinite_pit::core::OnMapUnloaded(); }
 }
 
 namespace mod::infinite_pit {
@@ -40,6 +43,8 @@ using ::ttyd::system::getMarioStDvdRoot;
 namespace ItemType = ::ttyd::item_data::ItemType;
 
 }
+
+namespace core {
 
 void ApplyFixedPatches() {
     mod::patch::writeBranchPair(
@@ -65,6 +70,9 @@ int32_t LoadMap() {
             ttyd::seqdrv::SeqIndex::kTitle, nullptr, nullptr);
         return 1;
     }
+
+    skipPeachIntermissions();
+
     if (!strcmp(area, "tou")) {
         if (ttyd::seqdrv::seqGetSeq() == 1) { //1 is ttyd::seqdrv::SeqIndex::kTitle
             area = "tou2";
@@ -128,4 +136,9 @@ int32_t LoadMap() {
     return 1;
 }
 
+void OnMapUnloaded() {
+    // Normal unloading logic follows...
 }
+
+}  // namespace core
+}  // namespace mod::infinite_pit

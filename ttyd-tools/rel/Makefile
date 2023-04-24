@@ -161,7 +161,7 @@ $(OFILES_SOURCES) : $(HFILES)
 %.gci: %.rel
 	@echo packing ... $(notdir $@)
 	@$(GCIPACK) $< "rel" "Paper Mario" "TTYD Infinite Pit" $(BANNERFILE) $(ICONFILE) $(GAMECODE)
-	cp $< "C:\Users\Rainchus\Desktop\Dolphin\User\GC\USA\Card A\rel.us.gci"
+	cp $@ "C:\Users\Rainchus\Desktop\Dolphin\User\GC\USA\Card A\rel.us.gci"
 	
 #---------------------------------------------------------------------------------
 # This rule links in binary data with the .jpg extension

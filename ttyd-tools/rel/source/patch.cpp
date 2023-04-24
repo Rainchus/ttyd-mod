@@ -86,4 +86,17 @@ void hookInstruction(void *location, InstructionHookHandler handler, void *user)
 	writeBranch(location, trampoline);
 }
 
+void writeBranchPair(
+    void *original_start, void *original_end, void *new_start, void *new_end) {
+    writeBranch(original_start, new_start);
+    writeBranch(new_end, original_end);
+}
+
+void writeBranchPair(
+    void *original_start, void *new_start, void *new_end) {
+    writeBranch(original_start, new_start);
+    writeBranch(new_end, 
+        reinterpret_cast<void*>(reinterpret_cast<int32_t>(original_start) + 4));
+}
+
 }
