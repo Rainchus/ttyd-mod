@@ -44,7 +44,13 @@ namespace ItemType = ::ttyd::item_data::ItemType;
 
 }
 
+void setNewFileAttributes(void);
+
 namespace core {
+    
+void OnFileLoad(bool new_file = true) {
+    setNewFileAttributes();
+}
 
 void ApplyFixedPatches() {
     mod::patch::writeBranchPair(
@@ -74,7 +80,7 @@ int32_t LoadMap() {
     skipPeachIntermissions();
 
     if (!strcmp(area, "tou")) {
-        if (ttyd::seqdrv::seqGetSeq() == 1) { //1 is ttyd::seqdrv::SeqIndex::kTitle
+        if (ttyd::seqdrv::seqGetSeq() == ttyd::seqdrv::SeqIndex::kTitle) {
             area = "tou2";
         } else if (!strcmp(ttyd::seq_mapchange::NextMap, "tou_03")) {
             area = "tou2";

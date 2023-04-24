@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "swdrv.h": "c",
-        "console.h": "c"
+        "console.h": "c",
+        "cstdint": "cpp",
+        "cmath": "cpp"
     }
 }

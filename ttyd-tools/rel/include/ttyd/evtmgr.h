@@ -109,7 +109,11 @@ void evtStopOther(EvtEntry *evt, uint8_t typeMask);
 void evtStartOther(EvtEntry *evt, uint8_t typeMask);
 EvtEntry *evtGetPtr(int32_t index);
 EvtEntry *evtGetPtrID(int32_t threadId);
-
+void evtSetFloat(evtmgr::EvtEntry* evt, int32_t v, float value);
+float evtGetFloat(evtmgr::EvtEntry* evt, int32_t v);
+void evtSetValue(evtmgr::EvtEntry* evt, int32_t v, uint32_t value);
+// evtGetNumber
+uint32_t evtGetValue(evtmgr::EvtEntry* evt, int32_t v);
 // Local functions
 // void make_pri_table();
 // void evtEntryRunCheck(EvtEntry *evt);

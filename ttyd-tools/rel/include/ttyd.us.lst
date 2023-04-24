@@ -1470,3 +1470,115 @@
 800d5738:pouchGetHaveBadgeCnt
 800d59c8:pouchInit
 800d5eb0:pouchGetPtr
+
+// fadedrv.o
+// text
+// 80010CD4:fadeSetNarrowFast
+// 80010CE8:fadeGetTpl
+// 80010CF4:fadeReset
+// 80010D94:fadeIsFinish
+// 80010DC0:disp_dummy_black
+// 80010FB8:disp_tec
+// 800113BC:disp_maku
+// 800116F4:zFill
+// 8001198C:z
+// 80011A7C:disp_texture
+// 80012058:fadeMain
+// 80013220:fadeSetOffscreenCallback
+// 80013230:fadeSetAnimVirtualPos
+// 80013290:fadeSetAnimOfsPos
+// 800132A0:fadeSetSpotPos
+// 800132B0:fadeWhiteOutOff
+// 800132C4:fadeWhiteOutOn
+// 800132D8:fadeSoftFocusOff
+// 800132EC:fadeSoftFocusOn
+// 80013300:fadeTecSoftOff
+// 80013320:fadeTecSoftOn
+// 80013340:fadeTecOff
+// 80013354:fadeTecOn
+80013368:fadeEntry
+// 80013AA4:fadeTexSetup
+// 80013B90:fadeInit
+// 80013CA4:_callback
+// data
+8041E620:gpFadeWork
+
+8041E940:_mariostSystemLevel
+
+// camdrv.o
+// 8000E388:camLetterBox
+// 8000E564:camLetterBoxDraw
+// 8000E7E8:getScreenPoint
+// 8000E8A4:camSetTypeOrtho
+// 8000E8C0:camSetTypePersp
+// 8000E8DC:camCtrlOff
+// 8000E8FC:camCtrlOn
+// 8000E91C:L_camDispOff
+8000E93C:L_camDispOn
+// 8000E95C:camSetMode
+// 8000E974:camEffMain
+// 8000EA30:cam3dImgMain
+// 8000EA68:cam3dMain
+// 8000F2D4:camSetCurNo
+// 8000F2DC:camGetCurNo
+// 8000F2E4:camGetCurPtr
+8000F2FC:camGetPtr
+// 8000F310:camUnLoadRoad
+// 8000F36C:camLoadRoad
+// 8000F454:camDraw
+// 8000F548:camEvalNearFar
+// 8000F704:camMain
+// 8000FAC8:camEntryPersp
+// 8000FD9C:camInit
+
+800DC0F8:psndClearFlag
+801A94C0:marioSetCamId
+
+800BFA10:partyRun
+// 800BFA40:partyCtrlOn
+// 800BFA78:partyCtrlOff
+// 800BFAB0:partyChgPaper
+// 800BFB20:partyChgPose
+// 800BFB9C:partyChgPoseId
+// 800BFD00:partyPaperLightOff
+// 800BFD28:partyPaperOff
+// 800BFDA4:partyPaperOn
+// 800BFEC4:anotherPartyGetPtr
+800BFEE8:partyGetPtr
+
+// evtmgr_cmd.o
+800304bc:evtSetFloat
+80030840:evtGetFloat
+80030cfc:evtSetValue
+800310fc:evtGetNumber
+80031260:evtGetValue
+
+// evtmgr.o
+80035a28:evtGetPtrID
+80035a88:evtGetPtr
+80035ac4:evtStartOther
+80035b4c:evtStopOther
+80035bd4:evtStartAll
+80035c68:evtStopAll
+80035cfc:evtStartID
+80035d9c:evtStopID
+80035e3c:evtStart
+80036210:evtStop
+800365e4:evtSetType
+800365ec:evtSetSpeed
+800365fc:evtSetPri
+80036604:evtCheckID
+80036664:evtDeleteID
+80036700:evtDelete
+800368d0:evtmgrMain
+80036abc:evtRestart
+80036c04:evtBrotherEntry
+80036eec:evtChildEntry
+80037220:evtEntryType
+800374ac:evtEntry
+// 80037738:evtEntryRunCheck
+800377b0:evtmgrReInit
+8003781c:evtmgrInit
+// 80037934:make_pri_table
+80037a60:evtGetWork
+

@@ -87,9 +87,11 @@ void Mod::updateEarly()
 	mPFN_makeKey_trampoline();
 }
 
+void drawModMain(void);
+
 void Mod::draw()
 {
-
+	drawModMain();
 }
 
 }

@@ -63,4 +63,6 @@ private:
 	ConsoleSystem mConsole;
 };
 
+extern Mod* gMod;
+
 }

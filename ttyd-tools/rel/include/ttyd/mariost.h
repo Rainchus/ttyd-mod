@@ -92,7 +92,8 @@ void gcRumbleCheck();
 
 // .data
 extern MarioSt_Globals* g_MarioSt;
-
+extern void *globalWorkPointer;
+extern int32_t _mariostSystemLevel;
 }
 
 }

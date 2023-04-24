@@ -43,6 +43,7 @@ int partyGetHp(int partyKindId);
 // Get tech level for party kind.
 int partyGetTechLv(int partyKindId);
 
+
 }
 
 }

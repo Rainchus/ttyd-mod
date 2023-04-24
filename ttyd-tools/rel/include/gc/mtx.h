@@ -5,6 +5,10 @@
 #include <cstdint>
 
 namespace gc::mtx {
+    
+typedef mat3x4* mtx34;
+typedef float mtx44[4][4];
+typedef float mtxUnk4[][4];
 
 extern "C" {
 
