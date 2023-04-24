@@ -262,8 +262,11 @@ void doInitialSetup(void) {
     //ttyd::mario_pouch::pouchGetItem(33); //plane curse key
     setInitialFlags();
     setNextMap("gor_01");
+    ttyd::mario_pouch::pouchGetPtr()->star_points = 9;
     ttyd::mario_pouch::pouchGetItem(ttyd::item_data::ItemType::MAGICAL_MAP);
-    //ttyd::mario_pouch::pouchGetPtr()->max_sp = 6; //do something?
+    ttyd::mario_pouch::pouchGetPtr()->star_powers_obtained |= 1;
+    ttyd::mario_pouch::pouchGetPtr()->current_sp = 100; 
+    ttyd::mario_pouch::pouchGetPtr()->max_sp = 100;
     reloadRoomMain();
 }
 
@@ -312,10 +315,20 @@ void skipPeachIntermissions(void) {
     //entering petal meadows for the first time
     if (mario_st->gsw0 == 21) {
         if (!strcmp(ttyd::seq_mapchange::NextMap, "sys_01")) {
-            mario_st->gsw0 = 24;
+            mario_st->gsw0 = 28; //after koops talks to you after opening the gate in petalburg
             setNextBero("dokan_2");
             setNextMap("hei_00");
             reloadRoomMain();
+            return;
+        }
+    }
+
+    //1775 moon stone flag, item id 61
+
+    //entering shwonk fortress for quiz show
+    if (mario_st->gsw0 == 30) {
+        if (!strcmp(ttyd::seq_mapchange::NextMap, "hei_07")) {
+            mario_st->gsw0 = 31; //after quiz is completed
             return;
         }
     }
