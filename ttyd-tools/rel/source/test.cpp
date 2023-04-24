@@ -119,11 +119,13 @@ uint32_t CheckIfShouldExit(uint32_t arg0) {
     auto* mario_st = ttyd::mariost::g_MarioSt;
 
     //if just gave black key to plane curse chest
-    if (mario_st->gsw0 == 14) { //update to be correct (should be 14)
+    if (mario_st->gsw0 == 13) { //update to be correct (should be 13)
         if (!strcmp(ttyd::seq_mapchange::NextMap, "tik_19")) {
             ttyd::mario_pouch::pouchGetItem(4); //plane curse ability
             setNextBero("n_bero_5");
             setNextMap("tik_04");
+            ttyd::swdrv::swSet(1352); //plane curse chest open
+            mario_st->gsw0 = 15;
             reloadRoomMain();
         }
     }
@@ -210,6 +212,7 @@ void setInitialFlags(void) {
     ttyd::swdrv::swSet(0); //remove shop explanation text
     ttyd::swdrv::swSet(1335); //stairs before plane curse
     ttyd::swdrv::swSet(1353); //initial plane curse text
+    ttyd::swdrv::swSet(1369); //skip goombella's text about not equipping power smash
 
     //ttyd::swdrv::swSet(1337); //black key for plane curse flag
     //pouchGetItem give black key
@@ -247,7 +250,7 @@ void skipPeachIntermissions(void) {
     #else
     if (mario_st->gsw0 == 0) {
         if (!strcmp(ttyd::seq_mapchange::NextMap, "aaa_00")) {
-            mario_st->gsw0 = 14; //after frankly asks if you know how action commands work
+            mario_st->gsw0 = 13; //after frankly asks if you know how action commands work
             player->prevPartyId[0] = 1;
             player->prevPartyId[1] = 0;
             ttyd::mario_party::partyJoin(1);
