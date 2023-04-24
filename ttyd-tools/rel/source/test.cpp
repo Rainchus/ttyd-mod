@@ -283,7 +283,10 @@ void skipPeachIntermissions(void) {
     //if entering thousand year door room for first time
     if (mario_st->gsw0 == 15) {
         if (!strcmp(ttyd::seq_mapchange::NextMap, "tik_05")) {
-            mario_st->gsw0 = 16;
+            mario_st->gsw0 = 18;
+            setInitialFlags();
+            setNextMap("gor_02");
+            reloadRoomMain();
             return;
         }
     }
