@@ -142,7 +142,6 @@ uint32_t CheckIfShouldExit(uint32_t arg0) {
 void drawModMain(void) {
     auto* mario_st = ttyd::mariost::g_MarioSt;
     char *tempDisplayBuffer = DisplayBuffer;
-    //struct PouchData* pouch = *ttyd:mario_pouch:pouchGetPtr();
 
     sprintf(tempDisplayBuffer,"Added Item ID: %d", keyItemReceived);
     DrawText(tempDisplayBuffer, -180, -105, 255, true, ~0U, 0.75f, /* alignment = center */ 4);
@@ -214,6 +213,19 @@ MOD_INIT_FUNCTION() {
         reinterpret_cast<void*>(startSeqSet),
         reinterpret_cast<void*>(endSeqSet));
 
+    //auto mash text with Y holding
+    mod::patch::writePatch(reinterpret_cast<void*>(0x80080FCC),0x4BF84061U);
+    mod::patch::writePatch(reinterpret_cast<void*>(0x80080FF0),0x4BF8403DU);
+    mod::patch::writePatch(reinterpret_cast<void*>(0x80084268),0x4BF80DC5U);
+    mod::patch::writePatch(reinterpret_cast<void*>(0x8000502C),0x3C60803DU);
+    mod::patch::writePatch(reinterpret_cast<void*>(0x80005030),0xA063A398U);
+    mod::patch::writePatch(reinterpret_cast<void*>(0x80005034),0x70630800U);
+    mod::patch::writePatch(reinterpret_cast<void*>(0x80005038),0x2C030800U);
+    mod::patch::writePatch(reinterpret_cast<void*>(0x8000503C),0x38600200U);
+    mod::patch::writePatch(reinterpret_cast<void*>(0x80005040),0x4D820020U);
+    mod::patch::writePatch(reinterpret_cast<void*>(0x80005044),0x38600000U);
+    mod::patch::writePatch(reinterpret_cast<void*>(0x80005048),0x48000F38U);
+
 }
 
 
@@ -230,6 +242,7 @@ void setInitialFlags(void) {
     ttyd::swdrv::swSet(1335); //stairs before plane curse
     ttyd::swdrv::swSet(1353); //initial plane curse text
     ttyd::swdrv::swSet(1369); //skip goombella's text about not equipping power smash
+    ttyd::swdrv::swSet(254); //remove goombella explaining to equip power smash
 
     //ttyd::swdrv::swSet(1337); //black key for plane curse flag
     //pouchGetItem give black key
@@ -247,6 +260,8 @@ void doInitialSetup(void) {
     //ttyd::mario_pouch::pouchGetItem(33); //plane curse key
     setInitialFlags();
     setNextMap("gor_01");
+    ttyd::mario_pouch::pouchGetItem(ttyd::item_data::ItemType::MAGICAL_MAP);
+    //ttyd::mario_pouch::pouchGetPtr()->max_sp = 6; //do something?
     reloadRoomMain();
 }
 
@@ -272,6 +287,8 @@ void skipPeachIntermissions(void) {
             player->prevPartyId[1] = 0;
             ttyd::mario_party::partyJoin(1);
             ttyd::mario_pouch::pouchGetItem(33); //plane curse key
+            //ttyd::mario_pouch::star_powers_obtained
+            //ttyd::mario_pouch::pouchGetItem(ttyd::item_data::ItemType::DIAMOND_STAR);
             setInitialFlags();
             setNextMap("tik_19");
             reloadRoomMain();

@@ -1,9 +1,16 @@
 #include "patch.h"
-
 #include <cstdint>
 #include <cstddef>
+#include <string.h>
+#include "gc/OSCache.h"
 
 namespace mod::patch {
+
+void clear_DC_IC_Cache(void *ptr, uint32_t size)
+{
+	gc::OSCache::DCFlushRange(ptr, size);
+	gc::OSCache::ICInvalidateRange(ptr, size);
+}
 
 // TODO: Add checks against invalid arguments
 constexpr static uint32_t assemble_stw(int rS, int rA, int d)
@@ -84,6 +91,17 @@ void hookInstruction(void *location, InstructionHookHandler handler, void *user)
 	ICInvalidateRange(trampoline, kTrampolineSize * sizeof(uint32_t));
 
 	writeBranch(location, trampoline);
+}
+
+void writePatch(
+    void* destination, const void* patch_start, uint32_t patch_len) {
+    clear_DC_IC_Cache(const_cast<void*>(patch_start), patch_len);
+    memcpy(destination, patch_start, patch_len);
+    clear_DC_IC_Cache(destination, patch_len);
+}
+
+void writePatch(void* destination, uint32_t patch_data) {
+    writePatch(destination, &patch_data, sizeof(uint32_t));
 }
 
 void writeBranchPair(

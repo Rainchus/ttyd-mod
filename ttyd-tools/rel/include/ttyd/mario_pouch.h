@@ -20,19 +20,19 @@ static_assert(sizeof(PouchPartyData) == 0xe);
     
 struct PouchData {
     PouchPartyData  party_data[8];
-    int16_t     current_hp;
-    int16_t     max_hp;
-    int16_t     current_fp;
-    int16_t     max_fp;
-    int16_t     coins;
-    int16_t     current_sp;
-    int16_t     max_sp;
-    int8_t      unk_07e[6];
-    float       audience_level;
-    int16_t     rank;
-    int16_t     level;
-    uint16_t    star_powers_obtained;  // Bitfield
-    int16_t     base_max_hp;
+/* 0x10 */ int16_t     current_hp;
+/* 0x12 */ int16_t     max_hp;
+/* 0x14 */ int16_t     current_fp;
+/* 0x16 */ int16_t     max_fp;
+/* 0x18 */ int16_t     coins;
+/* 0x1A */ int16_t     current_sp;
+/* 0x1C */ int16_t     max_sp;
+/* 0x1E */ int8_t      unk_07e[6];
+/* 0x20 */ float       audience_level;
+/* 0x22 */ int16_t     rank;
+/* 0x24 */ int16_t     level;
+/* 0x26 */ uint16_t    star_powers_obtained;  // Bitfield
+/* 0x28 */ int16_t     base_max_hp;
     int16_t     base_max_fp;
     int16_t     unallocated_bp;
     int16_t     total_bp;
