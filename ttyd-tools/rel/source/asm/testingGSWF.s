@@ -7,7 +7,8 @@ mflr %r0
 stw %r0, 0x10 (%sp)
 stw %r31, 0x14 (%sp)
 mr %r31, %r3
-bl gswf_func
+
+bl set_GSWF_Hook
 
 srawi %r4, %r31,5
 

@@ -95,24 +95,31 @@ extern const int32_t ItemRemove_EH = 0x800D4C3C;
 extern const int32_t ItemAdd_BH = 0x800d50CC;
 extern const int32_t ItemAdd_EH = 0x800d50D0;
 
+extern const int32_t SetSeq_BH = 0x8002e220;
+extern const int32_t SetSeq_EH = 0x8002e224;
+
 int32_t GSWFCopy;
 int32_t keyItemReceived;
 int32_t keyItemRemovedCopy;
 
-uint32_t GSWF_Func(uint32_t arg0) {
+uint32_t setGSWFHook(uint32_t arg0) {
     GSWFCopy = arg0;
     return arg0;
 }
 
-uint32_t keyItemFunc(uint32_t arg0) {
+uint32_t ItemAddHook(uint32_t arg0) {
     keyItemReceived = arg0;
     return arg0;
 }
 
-uint32_t keyItemRemoveFunc(uint32_t arg0) {
-    
+uint32_t ItemRemoveHook(uint32_t arg0) {
     keyItemRemovedCopy = arg0;
     return arg0;
+}
+
+void seqSetHook(uint32_t seqValue) {
+    //seqSetHook
+    return;
 }
 
 uint32_t CheckIfShouldExit(uint32_t arg0) {
@@ -165,11 +172,14 @@ extern "C" {
     void endRemovePouch();
     void startAddPouch();
     void endAddPouch();
+    void startSeqSet();
+    void endSeqSet();
 
+    void set_seq_hook(uint32_t seqValue) { return mod::seqSetHook(seqValue); }
     int32_t check_if_should_exit(uint32_t arg0) { return mod::CheckIfShouldExit(arg0); }
-    int32_t gswf_func(uint32_t arg0) { return mod::GSWF_Func(arg0); }
-    int32_t key_item_func_add(uint32_t arg0) { return mod::keyItemFunc(arg0); }
-    int32_t key_item_func_remove(uint32_t arg0) { return mod::keyItemRemoveFunc(arg0); }
+    int32_t set_GSWF_Hook(uint32_t arg0) { return mod::setGSWFHook(arg0); }
+    int32_t key_item_func_add(uint32_t arg0) { return mod::ItemAddHook(arg0); }
+    int32_t key_item_func_remove(uint32_t arg0) { return mod::ItemRemoveHook(arg0); }
 }
 
 MOD_INIT_FUNCTION() {
@@ -196,6 +206,13 @@ MOD_INIT_FUNCTION() {
         reinterpret_cast<void*>(ItemAdd_EH),
         reinterpret_cast<void*>(startAddPouch),
         reinterpret_cast<void*>(endAddPouch));
+
+    //set sequence hook
+    mod::patch::writeBranchPair(
+        reinterpret_cast<void*>(SetSeq_BH),
+        reinterpret_cast<void*>(SetSeq_EH),
+        reinterpret_cast<void*>(startSeqSet),
+        reinterpret_cast<void*>(endSeqSet));
 
 }
 
