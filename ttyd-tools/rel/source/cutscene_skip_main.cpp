@@ -3,7 +3,14 @@
 #define FALSE 0
 #define TRUE 1
 
-#define DEBUG FALSE
+#define DEBUG TRUE
+
+#define MINIMUM 0
+#define MEDIUM 1
+#define HEAVY 2
+
+int skipLevel = HEAVY;
+
 
 char DisplayBuffer[256];
 
@@ -79,15 +86,16 @@ uint32_t RemovePouchItemHook(uint32_t arg0) {
 void drawModMain(void) {
     auto* mario_st = ttyd::mariost::g_MarioSt;
     char *tempDisplayBuffer = DisplayBuffer;
+    ttyd::mario::Player *player = ttyd::mario::marioGetPtr();
     f32 yPos = -105;
 
-    sprintf(tempDisplayBuffer,"Added Item ID: %d", keyItemReceived);
+    sprintf(tempDisplayBuffer,"Added Item ID: %d", player->wAirTimer);
     DrawText(tempDisplayBuffer, -180, yPos, 255, true, ~0U, 0.75f, /* alignment = center */ 4);
     yPos -= 15.0f;
     sprintf(tempDisplayBuffer,"Removed Item ID: %d", keyItemRemovedCopy);
     DrawText(tempDisplayBuffer, -180, yPos, 255, true, ~0U, 0.75f, /* alignment = center */ 4);
     yPos -= 15.0f;
-    sprintf(tempDisplayBuffer,"Flag: %d", GSWFCopy);
+    sprintf(tempDisplayBuffer,"Flag: %08d", GSWFCopy);
     DrawText(tempDisplayBuffer, -190, yPos, 255, true, ~0U, 0.75f, /* alignment = center */ 4);
     yPos -= 15.0f;
     sprintf(tempDisplayBuffer,"Map: %s", ttyd::seq_mapchange::NextMap);
@@ -181,15 +189,28 @@ MOD_UPDATE_FUNCTION() {
 
 void setInitialFlags(void) {
     ttyd::swdrv::swSet(233); //remove initial save block text
+    ttyd::swdrv::swSet(234); //remove initial heart block text
     ttyd::swdrv::swSet(0); //remove shop explanation text
     ttyd::swdrv::swSet(1335); //stairs before plane curse
     ttyd::swdrv::swSet(1353); //initial plane curse text
     //ttyd::swdrv::swSet(1369); //skip goombella's text about not equipping power smash
     ttyd::swdrv::swSet(1325); //spoke to dazzle for the first time
     ttyd::swdrv::swSet(1805); //goombella explaining her field ability in petal meadows
+    //ttyd::swdrv::swSet(43); //removes blue switches from spawning that open hooktail's castle pipe
 
-    //ttyd::swdrv::swSet(1337); //black key for plane curse flag
+    //ttyd::swdrv::swSet(1337); //remove black key from ground for plane curse
     //ttyd::swdrv::swSet(1352); //plane curse chest open
+}
+
+void giveItemsToDebug(void) {
+    ttyd::mario_pouch::pouchGetItem(ttyd::item_data::ItemType::THUNDER_RAGE);
+    ttyd::mario_pouch::pouchGetItem(ttyd::item_data::ItemType::THUNDER_RAGE);
+    ttyd::mario_pouch::pouchGetItem(ttyd::item_data::ItemType::THUNDER_RAGE);
+    ttyd::mario_pouch::pouchGetItem(ttyd::item_data::ItemType::THUNDER_RAGE);
+    ttyd::mario_pouch::pouchGetItem(ttyd::item_data::ItemType::THUNDER_RAGE);
+    ttyd::mario_pouch::pouchGetItem(ttyd::item_data::ItemType::THUNDER_RAGE);
+    ttyd::mario_pouch::pouchGetItem(ttyd::item_data::ItemType::MOON_STONE);
+    ttyd::mario_pouch::pouchGetItem(ttyd::item_data::ItemType::SUN_STONE);
 }
 
 int skipInitialCutscenesDebug(void) {
@@ -199,13 +220,22 @@ int skipInitialCutscenesDebug(void) {
     //if new file
     if (mario_st->gsw0 == 0) {
         if (!strcmp(ttyd::seq_mapchange::NextMap, "aaa_00")) {
-            mario_st->gsw0 = 13; //after frankly asks if you know how action commands work
+            giveItemsToDebug();
+            ttyd::swdrv::swSet(1775); //remove moon stone from the ground
+            ttyd::swdrv::swSet(1774); //remove sun stone from the ground
+            //ttyd::swdrv::swSet(1804); //open pipe to hooktail's castle
+            //ttyd::swdrv::swSet(1796); //completed gold fuzzy fight?
+            mario_st->gsw0 = 34; //entering hooktails castle
             player->prevPartyId[0] = 1;
             player->prevPartyId[1] = 0;
             ttyd::mario_party::partyJoin(1);
+            ttyd::mario_party::partyJoin(2);
             ttyd::mario_pouch::pouchGetItem(33); //plane curse key
+            ttyd::mario_pouch::pouchGetItem(4); //plane curse ability
             setInitialFlags();
-            setNextMap("tik_19");
+            // setNextMap("tik_19");
+            setNextBero("w_bero");
+            setNextMap("gon_00");
             reloadRoomMain();
             return 1; //did skip cutscenes
         }
@@ -273,12 +303,43 @@ void skipCutscenesMain(void) {
         }
     }
 
-    //1775 moon stone flag, item id 61
-
     //entering shwonk fortress for quiz show
     if (mario_st->gsw0 == 30) {
         if (!strcmp(ttyd::seq_mapchange::NextMap, "hei_07")) {
             mario_st->gsw0 = 31; //after quiz is completed
+            return;
+        }
+    }
+
+    if (skipLevel == HEAVY) {
+        if (mario_st->gsw0 == 32) {
+            if (!strcmp(ttyd::seq_mapchange::NextMap, "hei_06")) {
+                ttyd::mario_party::partyJoin(2);
+                setNextBero("e_bero");
+                setNextMap("hei_00");
+                reloadRoomMain();
+                return;
+            }
+        }
+    }
+
+    //if entering hooktail castle map, skip intro
+    if (mario_st->gsw0 == 34) {
+        if (!strcmp(ttyd::seq_mapchange::NextMap, "gon_01")) {
+            mario_st->gsw0 = 37;
+            setNextMap("gon_01");
+            reloadRoomMain();
+            return;
+        }
+    }
+
+    //if entered red bones room, skip koops and his "dad" cutscene
+    if (mario_st->gsw0 == 37) {
+        if (!strcmp(ttyd::seq_mapchange::NextMap, "gon_03")) {
+            mario_st->gsw0 = 38;
+            setNextMap("gon_03");
+            setNextBero("w_bero");
+            reloadRoomMain();
             return;
         }
     }
