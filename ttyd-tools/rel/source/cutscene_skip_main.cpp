@@ -47,7 +47,24 @@ int32_t keyItemReceived;
 int32_t keyItemRemovedCopy;
 
 uint32_t setGSWFHook(uint32_t arg0) {
+    auto* mario_st = ttyd::mariost::g_MarioSt;
+    ttyd::mario_pouch::PouchData* pouch = ttyd::mario_pouch::pouchGetPtr();
+
     GSWFCopy = arg0;
+    //flag set when koop's dad comes out of hooktail
+    if (GSWFCopy == 1500) {
+        if (mario_st->gsw0 == 54) {
+            setNextBero("e_bero_1");
+            setNextMap("tik_01");
+            ttyd::swdrv::swSet(1493); //plane curse chest open
+            mario_st->gsw0 = 63; //after peach's email from intermission
+            pouch->star_powers_obtained |= 2;
+            pouch->max_sp += 100;
+            pouch->current_sp = pouch->max_sp;
+            ttyd::mario_pouch::pouchGetItem(114); //diamond star
+            reloadRoomMain();         
+        }
+    }
     return arg0;
 }
 
@@ -66,7 +83,7 @@ void seqSetHook(uint32_t seqValue) {
     return;
 }
 
-uint32_t RemovePouchItemHook(uint32_t arg0) {
+uint32_t RemovePouchItemHook(uint32_t removedItemID) {
     auto* mario_st = ttyd::mariost::g_MarioSt;
 
     //if just gave black key to plane curse chest
@@ -80,7 +97,22 @@ uint32_t RemovePouchItemHook(uint32_t arg0) {
             reloadRoomMain();
         }
     }
-    return arg0;  
+
+    //if just gave black key to paper curse chest
+    if (removedItemID == 34) {
+        if (mario_st->gsw0 == 44) { //update to be correct (should be 13)
+            if (!strcmp(ttyd::seq_mapchange::NextMap, "gon_06")) {
+                ttyd::mario_pouch::pouchGetItem(2); //paper curse ability
+                setNextBero("e_bero");
+                setNextMap("gon_05");
+                ttyd::swdrv::swSet(1493); //plane curse chest open
+                mario_st->gsw0 = 45;
+                reloadRoomMain();
+            }
+        }
+    }
+
+    return removedItemID;  
 }
 
 void drawModMain(void) {
@@ -89,7 +121,7 @@ void drawModMain(void) {
     ttyd::mario::Player *player = ttyd::mario::marioGetPtr();
     f32 yPos = -105;
 
-    sprintf(tempDisplayBuffer,"Added Item ID: %d", player->wAirTimer);
+    sprintf(tempDisplayBuffer,"Added Item ID: %d", keyItemReceived);
     DrawText(tempDisplayBuffer, -180, yPos, 255, true, ~0U, 0.75f, /* alignment = center */ 4);
     yPos -= 15.0f;
     sprintf(tempDisplayBuffer,"Removed Item ID: %d", keyItemRemovedCopy);
@@ -193,6 +225,7 @@ void setInitialFlags(void) {
     ttyd::swdrv::swSet(0); //remove shop explanation text
     ttyd::swdrv::swSet(1335); //stairs before plane curse
     ttyd::swdrv::swSet(1353); //initial plane curse text
+    ttyd::swdrv::swSet(1492); //initial paper curse text
     //ttyd::swdrv::swSet(1369); //skip goombella's text about not equipping power smash
     ttyd::swdrv::swSet(1325); //spoke to dazzle for the first time
     ttyd::swdrv::swSet(1805); //goombella explaining her field ability in petal meadows
@@ -216,7 +249,7 @@ void giveItemsToDebug(void) {
 int skipInitialCutscenesDebug(void) {
     ttyd::mario::Player *player = ttyd::mario::marioGetPtr();
     auto* mario_st = ttyd::mariost::g_MarioSt;
-
+    ttyd::mario_pouch::PouchData* pouch = ttyd::mario_pouch::pouchGetPtr();
     //if new file
     if (mario_st->gsw0 == 0) {
         if (!strcmp(ttyd::seq_mapchange::NextMap, "aaa_00")) {
@@ -225,17 +258,21 @@ int skipInitialCutscenesDebug(void) {
             ttyd::swdrv::swSet(1774); //remove sun stone from the ground
             //ttyd::swdrv::swSet(1804); //open pipe to hooktail's castle
             //ttyd::swdrv::swSet(1796); //completed gold fuzzy fight?
-            mario_st->gsw0 = 34; //entering hooktails castle
+            mario_st->gsw0 = 54; //entering hooktail lair
             player->prevPartyId[0] = 1;
             player->prevPartyId[1] = 0;
             ttyd::mario_party::partyJoin(1);
             ttyd::mario_party::partyJoin(2);
             ttyd::mario_pouch::pouchGetItem(33); //plane curse key
             ttyd::mario_pouch::pouchGetItem(4); //plane curse ability
+            ttyd::mario_pouch::pouchGetItem(2); //paper curse ability
+            pouch->star_powers_obtained |= 1;
+            pouch->max_sp += 100;
+            pouch->current_sp = pouch->max_sp;
             setInitialFlags();
             // setNextMap("tik_19");
-            setNextBero("w_bero");
-            setNextMap("gon_00");
+            setNextBero("e_bero");
+            setNextMap("gon_10");
             reloadRoomMain();
             return 1; //did skip cutscenes
         }
@@ -341,6 +378,17 @@ void skipCutscenesMain(void) {
             setNextBero("w_bero");
             reloadRoomMain();
             return;
+        }
+    }
+
+    if (mario_st->gsw0 == 47) {
+        if (!strcmp(ttyd::seq_mapchange::NextMap, "gon_04")) {
+            mario_st->gsw0 = 49;
+            ttyd::swdrv::swSet(1483); //hit hooktail castle blue switch 1
+            ttyd::swdrv::swSet(1484); //hit hooktail castle blue switch 2
+            setNextMap("gon_04");
+            setNextBero("e_bero_3");
+            reloadRoomMain();
         }
     }
 }
