@@ -9,7 +9,7 @@ stw %r31, 0x14 (%sp)
 mr %r31, %r3
 bl key_item_func_remove
 
-bl check_if_should_exit
+bl remove_pouch_item_hook
 
 lwz %r0, 0x10 (%sp)
 lwz %r31, 0x14 (%sp)

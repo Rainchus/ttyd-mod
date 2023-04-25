@@ -1,4 +1,5 @@
 ttyd-tools/rel/build.us/*
-ttyd-tools/rel/rel.us.elf
-ttyd-tools/rel/rel.us.gci
-ttyd-tools/rel/rel.us.rel
+events/
+*.elf
+*.gci
+*.rel

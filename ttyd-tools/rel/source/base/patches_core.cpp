@@ -14,7 +14,7 @@
 #include "patch.h"
 #include "mod.h"
 
-void skipPeachIntermissions(void); //from test.cpp
+void skipCutscenesMain(void); //from test.cpp
 
 extern const int32_t g_seq_mapChangeMain_OnMapUnload_BH = 0x80007e0c;
 extern const int32_t g_seq_mapChangeMain_MapLoad_BH = 0x80007ef0;
@@ -77,7 +77,7 @@ int32_t LoadMap() {
         return 1;
     }
 
-    skipPeachIntermissions();
+    skipCutscenesMain();
 
     if (!strcmp(area, "tou")) {
         if (ttyd::seqdrv::seqGetSeq() == ttyd::seqdrv::SeqIndex::kTitle) {

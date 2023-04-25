@@ -8,7 +8,7 @@
 namespace mod {
 
 ConCommand perf_fake_spike("perf_fake_spike", [](const char *args) {
-	uint32_t durationMs = 0;
+	long unsigned int durationMs = 0;
 	if (sscanf(args, "%lu", &durationMs) == 1)
 	{
 		// Cap to avoid double overflow
