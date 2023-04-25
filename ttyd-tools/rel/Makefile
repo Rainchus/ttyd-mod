@@ -7,14 +7,14 @@ ifeq ($(strip $(DEVKITPPC)),)
 $(error "Please set DEVKITPPC in your environment. export DEVKITPPC=<path to>devkitPPC")
 endif
 
-ifeq ($(strip $(PIT_TTYDTOOLS)),)
-$(error "Please set PIT_TTYDTOOLS in your environment. export PIT_TTYDTOOLS=<path to>ttyd-tools")
+ifeq ($(strip $(TTYDTOOLS)),)
+$(error "Please set TTYDTOOLS in your environment. export TTYDTOOLS=<path to>ttyd-tools")
 endif
 
 include $(DEVKITPPC)/gamecube_rules
 
-export ELF2REL	:=	$(PIT_TTYDTOOLS)/bin/elf2rel
-export GCIPACK	:=	python $(PIT_TTYDTOOLS)/gcipack/gcipack.py
+export ELF2REL	:=	$(TTYDTOOLS)/bin/elf2rel
+export GCIPACK	:=	python $(TTYDTOOLS)/gcipack/gcipack.py
 
 ifeq ($(VERSION),)
 all: us
@@ -161,7 +161,7 @@ $(OFILES_SOURCES) : $(HFILES)
 %.gci: %.rel
 	@echo packing ... $(notdir $@)
 	@$(GCIPACK) $< "rel" "Paper Mario" "TTYD Infinite Pit" $(BANNERFILE) $(ICONFILE) $(GAMECODE)
-	cp $@ "C:\Users\Rainchus\Desktop\Dolphin\User\GC\USA\Card A\rel.us.gci"
+	cp $@ "$(GCI_PATH)"
 	
 #---------------------------------------------------------------------------------
 # This rule links in binary data with the .jpg extension
