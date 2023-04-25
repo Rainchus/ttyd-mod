@@ -39,6 +39,28 @@ bool checkButtonComboEveryFrame(uint32_t combo)
     return (ButtonInput & combo) == combo;
 }
 
+void giveStarByIndex(int starIndex) {
+    ttyd::mario_pouch::PouchData* pouch = ttyd::mario_pouch::pouchGetPtr();
+
+    if (starIndex == 0) { //is
+        if (!(pouch->star_powers_obtained & 1)) {
+            ttyd::mario_pouch::pouchGetItem(ttyd::item_data::ItemType::MAGICAL_MAP);
+            pouch->star_powers_obtained |= 1;
+            pouch->max_sp += 100;
+            pouch->current_sp = pouch->max_sp; //fully restore sp
+        }
+        return;
+    }
+
+    if (!(pouch->star_powers_obtained & (1 << starIndex))) {
+        ttyd::mario_pouch::pouchGetItem(113 + starIndex); //give player the star in their inventory
+        pouch->star_powers_obtained |= (1 << starIndex);
+        //increment star power
+        pouch->max_sp += 100;
+        pouch->current_sp = pouch->max_sp; //fully restore sp
+    }
+}
+
 
 namespace mod {
 
@@ -58,10 +80,7 @@ uint32_t setGSWFHook(uint32_t arg0) {
             setNextMap("tik_01");
             ttyd::swdrv::swSet(1493); //plane curse chest open
             mario_st->gsw0 = 63; //after peach's email from intermission
-            pouch->star_powers_obtained |= 2;
-            pouch->max_sp += 100;
-            pouch->current_sp = pouch->max_sp;
-            ttyd::mario_pouch::pouchGetItem(114); //diamond star
+            giveStarByIndex(1); //give diamond star
             reloadRoomMain();         
         }
     }
@@ -87,7 +106,7 @@ uint32_t RemovePouchItemHook(uint32_t removedItemID) {
     auto* mario_st = ttyd::mariost::g_MarioSt;
 
     //if just gave black key to plane curse chest
-    if (mario_st->gsw0 == 13) { //update to be correct (should be 13)
+    if (mario_st->gsw0 == 13) {
         if (!strcmp(ttyd::seq_mapchange::NextMap, "tik_19")) {
             ttyd::mario_pouch::pouchGetItem(4); //plane curse ability
             setNextBero("n_bero_5");
@@ -100,13 +119,38 @@ uint32_t RemovePouchItemHook(uint32_t removedItemID) {
 
     //if just gave black key to paper curse chest
     if (removedItemID == 34) {
-        if (mario_st->gsw0 == 44) { //update to be correct (should be 13)
+        if (mario_st->gsw0 == 44) {
             if (!strcmp(ttyd::seq_mapchange::NextMap, "gon_06")) {
                 ttyd::mario_pouch::pouchGetItem(2); //paper curse ability
                 setNextBero("e_bero");
                 setNextMap("gon_05");
                 ttyd::swdrv::swSet(1493); //plane curse chest open
                 mario_st->gsw0 = 45;
+                reloadRoomMain();
+            }
+        }
+    }
+
+    //if just gave flurrie her necklace
+    if (removedItemID == 63) {
+        if (mario_st->gsw0 == 86) {
+            if (!strcmp(ttyd::seq_mapchange::NextMap, "win_04")) {
+                mario_st->gsw0 = 87;
+                ttyd::mario_party::partyJoin(5);
+                setNextBero("n_bero");
+                setNextMap("win_03");
+                reloadRoomMain();
+            }
+        }
+    }
+
+    //if just unlocked the red cage with the red key in ch2
+    if (removedItemID == 16) {
+        if (mario_st->gsw0 == 93) {
+            if (!strcmp(ttyd::seq_mapchange::NextMap, "mri_03")) {
+                mario_st->gsw0 = 94;
+                setNextBero("dokan1");
+                setNextMap("mri_20");
                 reloadRoomMain();
             }
         }
@@ -214,12 +258,22 @@ MOD_INIT_FUNCTION() {
 
 
 MOD_UPDATE_FUNCTION() {
+    auto* mario_st = ttyd::mariost::g_MarioSt;
+    ttyd::mario_pouch::PouchData* pouch = ttyd::mario_pouch::pouchGetPtr();
 
+    //after beating ch2 xnauts
+    if (mario_st->gsw0 == 89) {
+        mario_st->gsw0 = 90;
+        setNextBero("dokan1");
+        setNextMap("mri_02");
+        reloadRoomMain();     
+    } 
 }
 
 }
 
 void setInitialFlags(void) {
+    ttyd::swdrv::swSet(38); //read email
     ttyd::swdrv::swSet(233); //remove initial save block text
     ttyd::swdrv::swSet(234); //remove initial heart block text
     ttyd::swdrv::swSet(0); //remove shop explanation text
@@ -234,7 +288,7 @@ void setInitialFlags(void) {
     //ttyd::swdrv::swSet(1337); //remove black key from ground for plane curse
     //ttyd::swdrv::swSet(1352); //plane curse chest open
 }
-
+            
 void giveItemsToDebug(void) {
     ttyd::mario_pouch::pouchGetItem(ttyd::item_data::ItemType::THUNDER_RAGE);
     ttyd::mario_pouch::pouchGetItem(ttyd::item_data::ItemType::THUNDER_RAGE);
@@ -258,7 +312,7 @@ int skipInitialCutscenesDebug(void) {
             ttyd::swdrv::swSet(1774); //remove sun stone from the ground
             //ttyd::swdrv::swSet(1804); //open pipe to hooktail's castle
             //ttyd::swdrv::swSet(1796); //completed gold fuzzy fight?
-            mario_st->gsw0 = 54; //entering hooktail lair
+            mario_st->gsw0 = 66; //saw punio in the sewer pre ch2
             player->prevPartyId[0] = 1;
             player->prevPartyId[1] = 0;
             ttyd::mario_party::partyJoin(1);
@@ -266,13 +320,12 @@ int skipInitialCutscenesDebug(void) {
             ttyd::mario_pouch::pouchGetItem(33); //plane curse key
             ttyd::mario_pouch::pouchGetItem(4); //plane curse ability
             ttyd::mario_pouch::pouchGetItem(2); //paper curse ability
-            pouch->star_powers_obtained |= 1;
-            pouch->max_sp += 100;
-            pouch->current_sp = pouch->max_sp;
+            giveStarByIndex(0); //give map
+            giveStarByIndex(1); //give diamond star
+            giveStarByIndex(2); //give emerald star
             setInitialFlags();
-            // setNextMap("tik_19");
-            setNextBero("e_bero");
-            setNextMap("gon_10");
+            setNextBero("dokan");
+            setNextMap("tik_04");
             reloadRoomMain();
             return 1; //did skip cutscenes
         }
@@ -381,6 +434,7 @@ void skipCutscenesMain(void) {
         }
     }
 
+    //just unlocked door using key gotten from paper mode ability
     if (mario_st->gsw0 == 47) {
         if (!strcmp(ttyd::seq_mapchange::NextMap, "gon_04")) {
             mario_st->gsw0 = 49;
@@ -389,6 +443,70 @@ void skipCutscenesMain(void) {
             setNextMap("gon_04");
             setNextBero("e_bero_3");
             reloadRoomMain();
+        }
+    }
+
+    //entered room with punio in with pipe to ch2
+    if (mario_st->gsw0 == 66) {
+        if (!strcmp(ttyd::seq_mapchange::NextMap, "tik_03")) {
+            ttyd::swdrv::swSet(1334); //path to ch2 pipe opened by punio
+            mario_st->gsw0 = 68;
+            setNextMap("tik_03");
+            setNextBero("s_bero_1");
+            reloadRoomMain();
+            return;
+        }
+    }
+
+    //entered room with punio in with pipe to ch2
+    if (mario_st->gsw0 == 70) {
+        if (!strcmp(ttyd::seq_mapchange::NextMap, "sys_01")) {
+            mario_st->gsw0 = 71;
+            setNextMap("win_06");
+            setNextBero("dokan1");
+            reloadRoomMain();
+            return;
+        }
+    }
+
+    //entered room with shadow sirens in ch2
+    if (mario_st->gsw0 == 71) {
+        if (!strcmp(ttyd::seq_mapchange::NextMap, "win_00")) {
+            if (skipLevel == HEAVY) {
+                mario_st->gsw0 = 84;
+                setNextMap("win_00");
+                setNextBero("w_bero");
+                reloadRoomMain();
+                return;
+            } else {
+                mario_st->gsw0 = 72;
+                setNextMap("win_00");
+                setNextBero("w_bero");
+                reloadRoomMain();
+                return;
+            }
+        }
+    }
+
+    //entered room with entrance to great tree
+    if (mario_st->gsw0 == 87) {
+        if (!strcmp(ttyd::seq_mapchange::NextMap, "mri_00")) {
+            mario_st->gsw0 = 88;
+            setNextMap("mri_00");
+            setNextBero("w_bero");
+            reloadRoomMain();
+            return;
+        }
+    }
+
+    //entered room with xnaut and ms mowz cutscene
+    if (mario_st->gsw0 == 90) {
+        if (!strcmp(ttyd::seq_mapchange::NextMap, "mri_04")) {
+            mario_st->gsw0 = 92;
+            setNextMap("mri_03");
+            setNextBero("dokan");
+            reloadRoomMain();
+            return;
         }
     }
 }
