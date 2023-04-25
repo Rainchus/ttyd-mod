@@ -300,8 +300,6 @@ void giveItemsToDebug(void) {
     ttyd::mario_pouch::pouchGetItem(ttyd::item_data::ItemType::ZESS_DYNAMITE);
     ttyd::mario_pouch::pouchGetItem(ttyd::item_data::ItemType::JELLY_ULTRA);
     ttyd::mario_pouch::pouchGetItem(ttyd::item_data::ItemType::JELLY_ULTRA);
-    ttyd::mario_pouch::pouchGetItem(ttyd::item_data::ItemType::MOON_STONE);
-    ttyd::mario_pouch::pouchGetItem(ttyd::item_data::ItemType::SUN_STONE);
 }
 
 int skipInitialCutscenesDebug(void) {
