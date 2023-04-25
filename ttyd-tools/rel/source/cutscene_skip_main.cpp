@@ -296,6 +296,10 @@ void giveItemsToDebug(void) {
     ttyd::mario_pouch::pouchGetItem(ttyd::item_data::ItemType::THUNDER_RAGE);
     ttyd::mario_pouch::pouchGetItem(ttyd::item_data::ItemType::THUNDER_RAGE);
     ttyd::mario_pouch::pouchGetItem(ttyd::item_data::ItemType::THUNDER_RAGE);
+    ttyd::mario_pouch::pouchGetItem(ttyd::item_data::ItemType::THUNDER_RAGE);
+    ttyd::mario_pouch::pouchGetItem(ttyd::item_data::ItemType::THUNDER_RAGE);
+    ttyd::mario_pouch::pouchGetItem(ttyd::item_data::ItemType::THUNDER_RAGE);
+    ttyd::mario_pouch::pouchGetItem(ttyd::item_data::ItemType::THUNDER_RAGE);
     ttyd::mario_pouch::pouchGetItem(ttyd::item_data::ItemType::MOON_STONE);
     ttyd::mario_pouch::pouchGetItem(ttyd::item_data::ItemType::SUN_STONE);
 }
@@ -489,6 +493,17 @@ void skipCutscenesMain(void) {
     }
 
     //entered room with entrance to great tree
+    if (mario_st->gsw0 == 73) {
+        if (!strcmp(ttyd::seq_mapchange::NextMap, "mri_00")) {
+            mario_st->gsw0 = 74;
+            setNextMap("mri_00");
+            setNextBero("w_bero");
+            reloadRoomMain();
+            return;
+        }
+    }
+
+    //entered room with entrance to great tree
     if (mario_st->gsw0 == 87) {
         if (!strcmp(ttyd::seq_mapchange::NextMap, "mri_00")) {
             mario_st->gsw0 = 88;
@@ -505,6 +520,17 @@ void skipCutscenesMain(void) {
             mario_st->gsw0 = 92;
             setNextMap("mri_03");
             setNextBero("dokan");
+            reloadRoomMain();
+            return;
+        }
+    }
+
+    //entered room with xnaut and ms mowz cutscene
+    if (mario_st->gsw0 == 98) {
+        if (!strcmp(ttyd::seq_mapchange::NextMap, "mri_03")) {
+            mario_st->gsw0 = 99;
+            setNextMap("mri_08");
+            setNextBero("e_bero");
             reloadRoomMain();
             return;
         }
