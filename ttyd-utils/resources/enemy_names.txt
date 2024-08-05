@@ -1,0 +1,231 @@
+Nothing
+Goomba
+Paragoomba
+Spiky Goomba
+Spinia
+Spania
+Lord Crump (Prologue)
+Gus
+Blooper
+Left Tentacle
+Right Tentacle
+Koopatrol
+Magikoopa
+Magikoopa (fake)
+Koopa
+Paratroopa
+Fuzzy
+Dull Bones
+Bald Cleft
+Bristle
+Gold Fuzzy
+Fuzzy Horde
+Red Bones
+Hooktail
+Dark Puff
+Pale Piranha
+Cleft
+Pider
+X-Naut
+Yux
+Mini-Yux
+Beldam (Ch. 2)
+Marilyn (Ch. 2)
+Vivian
+Magnus
+X-Fist
+Goomba (Glitzville)
+KP Koopa
+KP Paratroopa
+Pokey
+Lakitu
+Spiny
+H. Bald Cleft
+Bob-omb
+Bandit
+Big Bandit
+R. S. Buzzy
+Shady Koopa
+S. Paratroopa
+R. Magikoopa
+R. Magikoopa (fake)
+W. Magikoopa
+W. Magikoopa (fake)
+G. Magikoopa
+G. Magikoopa (fake)
+Dark Craw
+Hammer Bro
+Boomerang Bro
+Fire Bro
+Red Chomp
+D. Koopatrol
+Iron Cleft 1
+Iron Cleft 2
+Bowser (Ch. 3)
+Rawk Hawk
+Macho Grubba
+Hyper Goomba
+H. Paragoomba
+H. S. Goomba
+Crazee Dayzee
+Amazy Dayzee
+Hyper Cleft
+Buzzy Beetle
+Spike Top
+Swooper
+Boo
+Atomic Boo
+Doopliss (Ch. 4, first)
+Doopliss (Ch. 4, invincible)
+Doopliss (Ch. 4, second)
+Goombella (Ch. 4)
+Koops (Ch. 4)
+Yoshi (Ch. 4)
+Flurrie (Ch. 4)
+Ember
+Lava Bubble
+Green Fuzzy
+Flower Fuzzy
+Putrid Piranha
+Parabuzzy
+Bill Blaster
+Bullet Bill
+Bulky Bob-omb
+Cortez
+Cortez Bone Pile
+Cortez Sword
+Cortez Claw
+Cortez Rapier
+Cortez Saber
+Lord Crump (Ch. 5)
+X-Nauts [1]
+X-Nauts [2]
+X-Nauts [3]
+Ruff Puff
+Poison Pokey
+S. Parabuzzy
+Dark Boo
+Smorg
+Smorg Tentacle A
+Smorg Tentacle B
+Smorg Tentacle C
+Smorg Claw
+Ice Puff
+Frost Piranha
+Moon Cleft
+Z-Yux
+Mini-Z-Yux
+X-Yux
+Mini-X-Yux
+X-Naut PhD
+Elite X-Naut
+Magnus 2.0
+X-Punch
+Swoopula
+Phantom Ember
+B. Bill Blaster
+Bombshell Bill
+Chain Chomp
+Dark Wizzerd
+Dark Wizzerd (fake)
+Dry Bones
+Dark Bones
+Gloomtail
+Beldam (Ch. 8)
+Marilyn (Ch. 8)
+Doopliss (Ch. 8)
+Doopliss (Ch. 8, Fake Mario)
+Doopliss (Ch. 8, Goombella)
+Doopliss (Ch. 8, Koops)
+Doopliss (Ch. 8, Yoshi)
+Doopliss (Ch. 8, Flurrie)
+Doopliss (Ch. 8, Vivian)
+Doopliss (Ch. 8, Bobbery)
+Doopliss (Ch. 8, Ms. Mowz)
+Bowser (Ch. 8)
+Kammy Koopa
+Grodus
+Grodus X
+Shadow Queen (First phase)
+Shadow Queen (Invincible phase)
+Shadow Queen (Second phase)
+L/R Hand
+Dead Hands
+Gloomba
+Paragloomba
+Spiky Gloomba
+Dark Koopa
+D. Paratroopa
+Badge Bandit
+Dark Lakitu
+S. Blue Spiny
+Wizzerd
+Piranha Plant
+Spunia
+Arantula
+Dark Bristle
+Poison Puff
+Swampire
+Bob-ulk
+Elite Wizzerd
+Elite Wizzerd (fake)
+Bonetail
+[Red Buzzy]
+[R. Parabuzzy]
+[R. S. Parabuzzy]
+[Hyper Bob-omb]
+[Ultra Bob-omb]
+[Tutorial Goombella]
+[Tutorial Frankly B2]
+[Tutorial Frankly B3]
+[Tutorial Frankly B4]
+[Epilogue Doopliss]
+[Epilogue Flurrie]
+[Epilogue Boo]
+[Epilogue Atomic Boo]
+[Epilogue Toad]
+[Epilogue Female Toad]
+[Unused Test]
+[Unused Kanbu 2]
+[Unused Beldam 2]
+[Unused Marilyn 2]
+[Unused Vivian 2]
+[Unused Beldam 3]
+[Unused Marilyn 3]
+[Unused Mecha-Goomba]
+[Unused Mecha-Turtle]
+[Unused Okorl]
+[Unused Yowarl]
+[Unused Tuyonarl]
+[Unused Wanawana]
+[Unused Apprentice Magikoopa]
+[Unused Shy Guy]
+[Unused Groove Guy]
+[Unused Pyro Guy]
+[Unused Spy Guy]
+[Unused Anti Guy]
+[Unused Bzzap!]
+[Unused Mini-Bzzap!]
+[Unused UFO]
+[Unused Pennington]
+[Unused Fighter]
+[Unused Zess T.]
+[Unused Master]
+[Unused Reporter]
+[Unused Hot-Dog Master]
+[Unused Flavio]
+[Unused Tree]
+[Unused Switch]
+[Unused Test NPC]
+Bomb-Squad Bomb
+System
+[Prologue NPC Goombella]
+Mario
+Shell Shield
+Goombella
+Koops
+Yoshi
+Flurrie
+Vivian
+Bobbery
+Ms. Mowz

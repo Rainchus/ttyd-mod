@@ -1,0 +1,5 @@
+ttyd-tools/rel/build.us/*
+events/
+*.elf
+*.gci
+*.rel

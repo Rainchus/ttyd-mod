@@ -7,30 +7,24 @@ ifeq ($(strip $(DEVKITPPC)),)
 $(error "Please set DEVKITPPC in your environment. export DEVKITPPC=<path to>devkitPPC")
 endif
 
-ifeq ($(strip $(PIT_TTYDTOOLS)),)
-$(error "Please set PIT_TTYDTOOLS in your environment. export PIT_TTYDTOOLS=<path to>ttyd-tools")
+ifeq ($(strip $(TTYDTOOLS)),)
+$(error "Please set TTYDTOOLS in your environment. export TTYDTOOLS=<path to>ttyd-tools")
 endif
 
 include $(DEVKITPPC)/gamecube_rules
 
-export ELF2REL	:=	$(PIT_TTYDTOOLS)/bin/elf2rel
-export GCIPACK	:=	python $(PIT_TTYDTOOLS)/gcipack/gcipack.py
+export ELF2REL	:=	$(TTYDTOOLS)/bin/elf2rel
+export GCIPACK	:=	python $(TTYDTOOLS)/gcipack/gcipack.py
 
 ifeq ($(VERSION),)
-all: us jp eu
+all: us
 us:
 	@$(MAKE) --no-print-directory VERSION=us
-jp:
-	@$(MAKE) --no-print-directory VERSION=jp
-eu:
-	@$(MAKE) --no-print-directory VERSION=eu
 
 clean:
 	@$(MAKE) --no-print-directory clean_target VERSION=us
-	@$(MAKE) --no-print-directory clean_target VERSION=eu
-	@$(MAKE) --no-print-directory clean_target VERSION=jp
 
-.PHONY: all clean us jp eu
+.PHONY: all clean us
 else
 
 #---------------------------------------------------------------------------------
@@ -51,7 +45,7 @@ INCLUDES	:=	include
 
 MACHDEP		= -mno-sdata -mgcn -DGEKKO -mcpu=750 -meabi -mhard-float
 
-CFLAGS		= -nostdlib -ffreestanding -ffunction-sections -fdata-sections -g -Os -Wall -Werror -Wno-address-of-packed-member $(MACHDEP) $(INCLUDE)
+CFLAGS		= -nostdlib -ffunction-sections -fdata-sections -g -Os -Wall -Wno-address-of-packed-member $(MACHDEP) $(INCLUDE)
 CXXFLAGS	= -fno-exceptions -fno-rtti -std=gnu++17 $(CFLAGS)
 
 LDFLAGS		= -r -e _prolog -u _prolog -u _epilog -u _unresolved -Wl,--gc-sections -nostdlib -g $(MACHDEP) -Wl,-Map,$(notdir $@).map
@@ -60,12 +54,6 @@ LDFLAGS		= -r -e _prolog -u _prolog -u _epilog -u _unresolved -Wl,--gc-sections 
 ifeq ($(VERSION),us)
 	CFLAGS += -DTTYD_US
 	GAMECODE = "G8ME"
-else ifeq ($(VERSION),jp)
-	CFLAGS += -DTTYD_JP
-	GAMECODE = "G8MJ"
-else ifeq ($(VERSION),eu)
-	CFLAGS += -DTTYD_EU
-	GAMECODE = "G8MP"
 endif
 
 
@@ -173,6 +161,7 @@ $(OFILES_SOURCES) : $(HFILES)
 %.gci: %.rel
 	@echo packing ... $(notdir $@)
 	@$(GCIPACK) $< "rel" "Paper Mario" "TTYD Infinite Pit" $(BANNERFILE) $(ICONFILE) $(GAMECODE)
+	cp $@ "$(GCI_PATH)"
 	
 #---------------------------------------------------------------------------------
 # This rule links in binary data with the .jpg extension
