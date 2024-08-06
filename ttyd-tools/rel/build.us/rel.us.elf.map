@@ -300,7 +300,7 @@ Linker script and memory map
 .rela.plt
  *(.rela.plt)
 
-.text           0x80003100     0x3560
+.text           0x80003100     0x3660
  *(.text)
  .text          0x80003100       0x9c enemy_attack_hook.o
                 0x80003100                start_enemy_atk
@@ -370,185 +370,191 @@ Linker script and memory map
                 0x80003378                _restgpr_30_x
                 0x8000337c                _restgpr_31_x
  *(.text.*)
- .text._ZN3modL13mod_if_func84Ev
-                0x80003390        0x4 impossible_mode.o
- .text._ZN3modL13mod_if_func46Ev
-                0x80003394      0x14c impossible_mode.o
  .text._ZN3mod11drawModMainEv
-                0x800034e0      0x138 impossible_mode.o
-                0x800034e0                _ZN3mod11drawModMainEv
- .text.startup._GLOBAL__sub_I_swSet_BH
-                0x80003618       0x4c impossible_mode.o
- .text._ZN3mod17GetTextDimensionsEPKcfPfS2_
-                0x80003664       0x94 common_ui.o
-                0x80003664                _ZN3mod17GetTextDimensionsEPKcfPfS2_
- .text._ZN3mod8DrawTextEPKcffhbjfi
-                0x800036f8      0x1f4 common_ui.o
-                0x800036f8                _ZN3mod8DrawTextEPKcffhbjfi
+                0x80003390      0x138 impossible_mode.o
+                0x80003390                _ZN3mod11drawModMainEv
+ .text._ZN3mod16TattleAllEnemiesEv
+                0x800034c8       0x8c impossible_mode.o
+                0x800034c8                _ZN3mod16TattleAllEnemiesEv
  .text._ZN3modL13mod_if_func59Ev
-                0x800038ec      0x274 con_anim.o
+                0x80003554      0x174 impossible_mode.o
+ .text._ZN3mod20GiveAndEquipPeekabooEv
+                0x800036c8       0x58 impossible_mode.o
+                0x800036c8                _ZN3mod20GiveAndEquipPeekabooEv
+ .text._ZN3modL14mod_if_func112Ev
+                0x80003720        0x4 impossible_mode.o
+ .text.startup._GLOBAL__sub_I_swSet_BH
+                0x80003724       0x4c impossible_mode.o
+ .text._ZN3mod17GetTextDimensionsEPKcfPfS2_
+                0x80003770       0x94 common_ui.o
+                0x80003770                _ZN3mod17GetTextDimensionsEPKcfPfS2_
+ .text._ZN3mod8DrawTextEPKcffhbjfi
+                0x80003804      0x1f4 common_ui.o
+                0x80003804                _ZN3mod8DrawTextEPKcffhbjfi
+ .text._ZN3modL13mod_if_func59Ev
+                0x800039f8      0x274 con_anim.o
  .text._ZZN3modL13mod_if_func59EvENUlN4ttyd7dispdrv8CameraIdEPvE_4_FUNES2_S3_
-                0x80003b60      0x164 con_anim.o
+                0x80003c6c      0x164 con_anim.o
  .text.startup._GLOBAL__sub_I__ZN3mod10ap_view_txE
-                0x80003cc4      0x16c con_anim.o
+                0x80003dd0      0x16c con_anim.o
  .text.startup._GLOBAL__sub_I__ZN3mod10event_loadE
-                0x80003e30       0x34 con_event.o
+                0x80003f3c       0x34 con_event.o
  .text._ZN3modL13mod_if_func88Ev
-                0x80003e64       0x18 con_evt.o
+                0x80003f70       0x18 con_evt.o
  .text._ZN3modL13mod_if_func13Ev
-                0x80003e7c       0x30 con_evt.o
+                0x80003f88       0x30 con_evt.o
  .text._ZZN3modL13mod_if_func88EvENUlPN2gc2os9OSContextEPvE_4_FUNES3_S4_
-                0x80003eac       0x24 con_evt.o
+                0x80003fb8       0x24 con_evt.o
  .text._ZZN3modL13mod_if_func13EvENUlN4ttyd7dispdrv8CameraIdEPvE_4_FUNES2_S3_
-                0x80003ed0      0x144 con_evt.o
+                0x80003fdc      0x144 con_evt.o
  .text.startup._GLOBAL__sub_I__ZN3mod14evt_show_tableE
-                0x80004014       0x7c con_evt.o
+                0x80004120       0x7c con_evt.o
  .text._ZN3modL13mod_if_func22Ev
-                0x80004090       0x54 con_mario.o
+                0x8000419c       0x54 con_mario.o
  .text.startup._GLOBAL__sub_I__ZN3mod13mario_set_posE
-                0x800040e4       0x88 con_mario.o
+                0x800041f0       0x88 con_mario.o
  .text._ZN3modL13mod_if_func46Ev
-                0x8000416c      0x158 con_perf.o
+                0x80004278      0x158 con_perf.o
  .text._ZN3modL13mod_if_func29Ev
-                0x800042c4       0xbc con_perf.o
+                0x800043d0       0xbc con_perf.o
  .text.startup._GLOBAL__sub_I__ZN3mod15perf_fake_spikeE
-                0x80004380       0xc4 con_perf.o
+                0x8000448c       0xc4 con_perf.o
  .text._ZN3modL13mod_if_func16Ev
-                0x80004444       0x70 con_seq.o
+                0x80004550       0x70 con_seq.o
  .text._ZZN3modL13mod_if_func16EvENUlPN4ttyd6seqdrv7SeqInfoEE_4_FUNES3_
-                0x800044b4       0x34 con_seq.o
+                0x800045c0       0x34 con_seq.o
  .text.startup._GLOBAL__sub_I__ZN3mod13seq_logo_skipE
-                0x800044e8       0x8c con_seq.o
+                0x800045f4       0x8c con_seq.o
  .text._ZN3mod13ConsoleSystem8logColorEPKcN2gc6color4E
-                0x80004574      0x1e4 console.o
-                0x80004574                _ZN3mod13ConsoleSystem8logColorEPKcN2gc6color4E
+                0x80004680      0x1e4 console.o
+                0x80004680                _ZN3mod13ConsoleSystem8logColorEPKcN2gc6color4E
  .text._ZN3mod13ConsoleSystem7logInfoEPKcz
-                0x80004758       0xac console.o
-                0x80004758                _ZN3mod13ConsoleSystem7logInfoEPKcz
+                0x80004864       0xac console.o
+                0x80004864                _ZN3mod13ConsoleSystem7logInfoEPKcz
  .text._ZN3mod7CC_findEPKc
-                0x80004804       0xf0 console.o
-                0x80004804                _ZN3mod7CC_findEPKc
+                0x80004910       0xf0 console.o
+                0x80004910                _ZN3mod7CC_findEPKc
  .text._ZN3mod13ConsoleSystem10logWarningEPKcz
-                0x800048f4       0xb0 console.o
-                0x800048f4                _ZN3mod13ConsoleSystem10logWarningEPKcz
+                0x80004a00       0xb0 console.o
+                0x80004a00                _ZN3mod13ConsoleSystem10logWarningEPKcz
  .text._ZN3mod13ConsoleSystem8logErrorEPKcz
-                0x800049a4       0xb0 console.o
-                0x800049a4                _ZN3mod13ConsoleSystem8logErrorEPKcz
+                0x80004ab0       0xb0 console.o
+                0x80004ab0                _ZN3mod13ConsoleSystem8logErrorEPKcz
  .text._ZN3mod13ConsoleSystem7overlayEPKcz
-                0x80004a54       0xbc console.o
-                0x80004a54                _ZN3mod13ConsoleSystem7overlayEPKcz
+                0x80004b60       0xbc console.o
+                0x80004b60                _ZN3mod13ConsoleSystem7overlayEPKcz
  .text._ZN3mod13ConsoleSystem12setMonospaceEb
-                0x80004b10       0x24 console.o
-                0x80004b10                _ZN3mod13ConsoleSystem12setMonospaceEb
+                0x80004c1c       0x24 console.o
+                0x80004c1c                _ZN3mod13ConsoleSystem12setMonospaceEb
  .text._ZN3mod13ConsoleSystem4initEv
-                0x80004b34       0x14 console.o
-                0x80004b34                _ZN3mod13ConsoleSystem4initEv
+                0x80004c40       0x14 console.o
+                0x80004c40                _ZN3mod13ConsoleSystem4initEv
  .text._ZN3mod13ConsoleSystem8drawLineEiPKcN2gc6color4E
-                0x80004b48      0x130 console.o
-                0x80004b48                _ZN3mod13ConsoleSystem8drawLineEiPKcN2gc6color4E
+                0x80004c54      0x130 console.o
+                0x80004c54                _ZN3mod13ConsoleSystem8drawLineEiPKcN2gc6color4E
  .text._ZN3mod13ConsoleSystem14processCommandEPKc
-                0x80004c78      0x1f0 console.o
-                0x80004c78                _ZN3mod13ConsoleSystem14processCommandEPKc
+                0x80004d84      0x1f0 console.o
+                0x80004d84                _ZN3mod13ConsoleSystem14processCommandEPKc
  .text._ZN3mod13ConsoleSystem12updatePromptEv
-                0x80004e68      0x2f0 console.o
-                0x80004e68                _ZN3mod13ConsoleSystem12updatePromptEv
+                0x80004f74      0x2f0 console.o
+                0x80004f74                _ZN3mod13ConsoleSystem12updatePromptEv
  .text._ZN3mod13ConsoleSystem14updateUsbGeckoEv
-                0x80005158      0x120 console.o
-                0x80005158                _ZN3mod13ConsoleSystem14updateUsbGeckoEv
+                0x80005264      0x120 console.o
+                0x80005264                _ZN3mod13ConsoleSystem14updateUsbGeckoEv
  .text._ZN3mod13ConsoleSystem6updateEv
-                0x80005278       0x68 console.o
-                0x80005278                _ZN3mod13ConsoleSystem6updateEv
+                0x80005384       0x68 console.o
+                0x80005384                _ZN3mod13ConsoleSystem6updateEv
  .text._ZN3mod13ConsoleSystem4dispEv
-                0x800052e0      0x368 console.o
-                0x800052e0                _ZN3mod13ConsoleSystem4dispEv
+                0x800053ec      0x368 console.o
+                0x800053ec                _ZN3mod13ConsoleSystem4dispEv
  .text._ZZN3mod13ConsoleSystem6updateEvENUlN4ttyd7dispdrv8CameraIdEPvE_4_FUNES3_S4_
-                0x80005648        0x8 console.o
+                0x80005754        0x8 console.o
  .text.startup._GLOBAL__sub_I__ZN3mod10ConCommand6sFirstE
-                0x80005650      0x17c console.o
- .text._Znwj    0x800057cc        0xc cxx.o
-                0x800057cc                _Znwj
- .text._Znaj    0x800057d8        0x4 cxx.o
-                0x800057d8                _Znaj
+                0x8000575c      0x17c console.o
+ .text._Znwj    0x800058d8        0xc cxx.o
+                0x800058d8                _Znwj
+ .text._Znaj    0x800058e4        0x4 cxx.o
+                0x800058e4                _Znaj
  .text._ZN3mod8Keyboard7connectEv
-                0x800057dc       0x58 keyboard.o
-                0x800057dc                _ZN3mod8Keyboard7connectEv
+                0x800058e8       0x58 keyboard.o
+                0x800058e8                _ZN3mod8Keyboard7connectEv
  .text._ZN3mod8KeyboardC2Ei
-                0x80005834       0x20 keyboard.o
-                0x80005834                _ZN3mod8KeyboardC2Ei
-                0x80005834                _ZN3mod8KeyboardC1Ei
+                0x80005940       0x20 keyboard.o
+                0x80005940                _ZN3mod8KeyboardC2Ei
+                0x80005940                _ZN3mod8KeyboardC1Ei
  .text._ZN3mod8Keyboard10disconnectEv
-                0x80005854       0x40 keyboard.o
-                0x80005854                _ZN3mod8Keyboard10disconnectEv
+                0x80005960       0x40 keyboard.o
+                0x80005960                _ZN3mod8Keyboard10disconnectEv
  .text._ZN3mod8Keyboard6updateEv
-                0x80005894      0x1d0 keyboard.o
-                0x80005894                _ZN3mod8Keyboard6updateEv
+                0x800059a0      0x1d0 keyboard.o
+                0x800059a0                _ZN3mod8Keyboard6updateEv
  .text._ZZN3mod3Mod4initEvENUlvE0_4_FUNEv
-                0x80005a64        0x4 mod.o
+                0x80005b70        0x4 mod.o
  .text._ZZN3mod3Mod11updateEarlyEvENUlN4ttyd7dispdrv8CameraIdEPvE_4_FUNES3_S4_
-                0x80005a68        0x4 mod.o
+                0x80005b74        0x4 mod.o
  .text._ZN3mod3ModC2Ev
-                0x80005a6c       0x78 mod.o
-                0x80005a6c                _ZN3mod3ModC2Ev
-                0x80005a6c                _ZN3mod3ModC1Ev
+                0x80005b78       0x78 mod.o
+                0x80005b78                _ZN3mod3ModC2Ev
+                0x80005b78                _ZN3mod3ModC1Ev
  .text._ZN3mod3Mod4initEv
-                0x80005ae4       0xf8 mod.o
-                0x80005ae4                _ZN3mod3Mod4initEv
+                0x80005bf0       0xf8 mod.o
+                0x80005bf0                _ZN3mod3Mod4initEv
  .text.startup._ZN3mod4mainEv
-                0x80005bdc       0x38 mod.o
-                0x80005bdc                _ZN3mod4mainEv
+                0x80005ce8       0x38 mod.o
+                0x80005ce8                _ZN3mod4mainEv
  .text._ZN3mod3Mod11updateEarlyEv
-                0x80005c14       0x80 mod.o
-                0x80005c14                _ZN3mod3Mod11updateEarlyEv
+                0x80005d20       0x80 mod.o
+                0x80005d20                _ZN3mod3Mod11updateEarlyEv
  .text._ZZN3mod3Mod4initEvENUlvE_4_FUNEv
-                0x80005c94        0xc mod.o
+                0x80005da0        0xc mod.o
  .text._ZN3mod5patch17clear_DC_IC_CacheEPvj
-                0x80005ca0       0x3c patch.o
-                0x80005ca0                _ZN3mod5patch17clear_DC_IC_CacheEPvj
+                0x80005dac       0x3c patch.o
+                0x80005dac                _ZN3mod5patch17clear_DC_IC_CacheEPvj
  .text._ZN3mod5patch11writeBranchEPvS1_
-                0x80005cdc       0x48 patch.o
-                0x80005cdc                _ZN3mod5patch11writeBranchEPvS1_
+                0x80005de8       0x48 patch.o
+                0x80005de8                _ZN3mod5patch11writeBranchEPvS1_
  .text._ZN3mod5patch15hookInstructionEPvPFvPN2gc2os9OSContextES1_ES1_
-                0x80005d24       0xcc patch.o
-                0x80005d24                _ZN3mod5patch15hookInstructionEPvPFvPN2gc2os9OSContextES1_ES1_
+                0x80005e30       0xcc patch.o
+                0x80005e30                _ZN3mod5patch15hookInstructionEPvPFvPN2gc2os9OSContextES1_ES1_
  .text._ZN3mod5patch10writePatchEPvPKvj
-                0x80005df0       0x5c patch.o
-                0x80005df0                _ZN3mod5patch10writePatchEPvPKvj
+                0x80005efc       0x5c patch.o
+                0x80005efc                _ZN3mod5patch10writePatchEPvPKvj
  .text._ZN3mod5patch10writePatchEPvj
-                0x80005e4c       0x2c patch.o
-                0x80005e4c                _ZN3mod5patch10writePatchEPvj
+                0x80005f58       0x2c patch.o
+                0x80005f58                _ZN3mod5patch10writePatchEPvj
  .text._ZN3mod5patch15writeBranchPairEPvS1_S1_S1_
-                0x80005e78       0x40 patch.o
-                0x80005e78                _ZN3mod5patch15writeBranchPairEPvS1_S1_S1_
- .text._prolog  0x80005eb8       0x5c rel.o
-                0x80005eb8                _prolog
- .text._epilog  0x80005f14       0x4c rel.o
-                0x80005f14                _epilog
+                0x80005f84       0x40 patch.o
+                0x80005f84                _ZN3mod5patch15writeBranchPairEPvS1_S1_S1_
+ .text._prolog  0x80005fc4       0x5c rel.o
+                0x80005fc4                _prolog
+ .text._epilog  0x80006020       0x4c rel.o
+                0x80006020                _epilog
  .text._unresolved
-                0x80005f60        0x4 rel.o
-                0x80005f60                _unresolved
+                0x8000606c        0x4 rel.o
+                0x8000606c                _unresolved
  .text._ZN3modL10ugTransferEiPvib
-                0x80005f64      0x124 ug.o
+                0x80006070      0x124 ug.o
  .text._ZN3mod7ugProbeEi
-                0x80006088       0xf8 ug.o
-                0x80006088                _ZN3mod7ugProbeEi
+                0x80006194       0xf8 ug.o
+                0x80006194                _ZN3mod7ugProbeEi
  .text._ZN3mod6ugSendEiPKvi
-                0x80006180        0x8 ug.o
-                0x80006180                _ZN3mod6ugSendEiPKvi
+                0x8000628c        0x8 ug.o
+                0x8000628c                _ZN3mod6ugSendEiPKvi
  .text._ZN3mod6ugRecvEiPvi
-                0x80006188        0x8 ug.o
-                0x80006188                _ZN3mod6ugRecvEiPvi
- .text.strstr   0x80006190       0x90 util.o
-                0x80006190                strstr
+                0x80006294        0x8 ug.o
+                0x80006294                _ZN3mod6ugRecvEiPvi
+ .text.strstr   0x8000629c       0x90 util.o
+                0x8000629c                strstr
  .text.__lshrdi3
-                0x80006220       0x40 C:/devkitPro/devkitPPC/bin/../lib/gcc/powerpc-eabi/13.1.0\libgcc.a(_lshrdi3.o)
-                0x80006220                __lshrdi3
+                0x8000632c       0x40 C:/devkitPro/devkitPPC/bin/../lib/gcc/powerpc-eabi/13.1.0\libgcc.a(_lshrdi3.o)
+                0x8000632c                __lshrdi3
  .text.__divdi3
-                0x80006260      0x3ec C:/devkitPro/devkitPPC/bin/../lib/gcc/powerpc-eabi/13.1.0\libgcc.a(_divdi3.o)
-                0x80006260                __divdi3
+                0x8000636c      0x3ec C:/devkitPro/devkitPPC/bin/../lib/gcc/powerpc-eabi/13.1.0\libgcc.a(_divdi3.o)
+                0x8000636c                __divdi3
  *(.gnu.warning)
  *(.gnu.linkonce.t.*)
-                0x80006660                        . = ALIGN (0x20)
- *fill*         0x8000664c       0x14 00000000
+                0x80006760                        . = ALIGN (0x20)
+ *fill*         0x80006758        0x8 00000000
 
 .text._ZN3mod7ap_viewMUlPKcE_4_FUNES2_
                 0x00000000       0x9c
@@ -726,39 +732,39 @@ Linker script and memory map
  *(.tbss .tbss.* .gnu.linkonce.tb.*)
  *(.tcommon)
 
-.eh_frame       0x000004c0      0xd54
+.eh_frame       0x000004c0      0xd9c
  *(.eh_frame)
- .eh_frame      0x000004c0       0x90 impossible_mode.o
- .eh_frame      0x00000550       0x88 common_ui.o
+ .eh_frame      0x000004c0       0xd8 impossible_mode.o
+ .eh_frame      0x00000598       0x88 common_ui.o
                                 0x110 (size before relaxing)
- .eh_frame      0x000005d8       0xd0 con_anim.o
- .eh_frame      0x000006a8       0x90 con_event.o
- .eh_frame      0x00000738       0xa8 con_evt.o
- .eh_frame      0x000007e0       0x68 con_mario.o
- .eh_frame      0x00000848       0x80 con_perf.o
- .eh_frame      0x000008c8       0xa0 con_seq.o
- .eh_frame      0x00000968      0x2fc console.o
+ .eh_frame      0x00000620       0xd0 con_anim.o
+ .eh_frame      0x000006f0       0x90 con_event.o
+ .eh_frame      0x00000780       0xa8 con_evt.o
+ .eh_frame      0x00000828       0x68 con_mario.o
+ .eh_frame      0x00000890       0x80 con_perf.o
+ .eh_frame      0x00000910       0xa0 con_seq.o
+ .eh_frame      0x000009b0      0x2fc console.o
                                 0x320 (size before relaxing)
- .eh_frame      0x00000c64       0x3c cxx.o
+ .eh_frame      0x00000cac       0x3c cxx.o
                                  0x64 (size before relaxing)
- .eh_frame      0x00000ca0       0xa8 keyboard.o
+ .eh_frame      0x00000ce8       0xa8 keyboard.o
                                  0xd0 (size before relaxing)
- .eh_frame      0x00000d48       0xf4 mod.o
+ .eh_frame      0x00000d90       0xf4 mod.o
                                 0x108 (size before relaxing)
- .eh_frame      0x00000e3c      0x104 patch.o
+ .eh_frame      0x00000e84      0x104 patch.o
                                 0x12c (size before relaxing)
- .eh_frame      0x00000f40        0x0 patches_core.o
+ .eh_frame      0x00000f88        0x0 patches_core.o
                                  0xa8 (size before relaxing)
- .eh_frame      0x00000f40       0x7c rel.o
- .eh_frame      0x00000fbc        0x0 reload.o
+ .eh_frame      0x00000f88       0x7c rel.o
+ .eh_frame      0x00001004        0x0 reload.o
                                  0xb4 (size before relaxing)
- .eh_frame      0x00000fbc       0x98 ug.o
- .eh_frame      0x00001054       0x3c util.o
- .eh_frame      0x00001090       0x28 C:/devkitPro/devkitPPC/bin/../lib/gcc/powerpc-eabi/13.1.0\libgcc.a(_lshrdi3.o)
- .eh_frame      0x000010b8       0x3c C:/devkitPro/devkitPPC/bin/../lib/gcc/powerpc-eabi/13.1.0\libgcc.a(_divdi3.o)
- .eh_frame      0x000010f4       0x28 C:/devkitPro/devkitPPC/bin/../lib/gcc/powerpc-eabi/13.1.0\libgcc.a(crtsavfpr.o)
- .eh_frame      0x0000111c       0x7c C:/devkitPro/devkitPPC/bin/../lib/gcc/powerpc-eabi/13.1.0\libgcc.a(crtresxfpr.o)
- .eh_frame      0x00001198       0x7c C:/devkitPro/devkitPPC/bin/../lib/gcc/powerpc-eabi/13.1.0\libgcc.a(crtresxgpr.o)
+ .eh_frame      0x00001004       0x98 ug.o
+ .eh_frame      0x0000109c       0x3c util.o
+ .eh_frame      0x000010d8       0x28 C:/devkitPro/devkitPPC/bin/../lib/gcc/powerpc-eabi/13.1.0\libgcc.a(_lshrdi3.o)
+ .eh_frame      0x00001100       0x3c C:/devkitPro/devkitPPC/bin/../lib/gcc/powerpc-eabi/13.1.0\libgcc.a(_divdi3.o)
+ .eh_frame      0x0000113c       0x28 C:/devkitPro/devkitPPC/bin/../lib/gcc/powerpc-eabi/13.1.0\libgcc.a(crtsavfpr.o)
+ .eh_frame      0x00001164       0x7c C:/devkitPro/devkitPPC/bin/../lib/gcc/powerpc-eabi/13.1.0\libgcc.a(crtresxfpr.o)
+ .eh_frame      0x000011e0       0x7c C:/devkitPro/devkitPPC/bin/../lib/gcc/powerpc-eabi/13.1.0\libgcc.a(crtresxgpr.o)
 
 .gcc_except_table
  *(.gcc_except_table)
@@ -775,28 +781,28 @@ Linker script and memory map
 .dynamic
  *(.dynamic)
 
-.ctors          0x00001214       0x2c
+.ctors          0x0000125c       0x24
  *crtbegin.o(.ctors)
  *(EXCLUDE_FILE(*crtend.o) .ctors)
- .ctors         0x00001214        0x4 impossible_mode.o
- .ctors         0x00001218        0x4 con_anim.o
- .ctors         0x0000121c        0x4 con_event.o
- .ctors         0x00001220        0x4 con_evt.o
- .ctors         0x00001224        0x4 con_mario.o
- .ctors         0x00001228        0x4 con_perf.o
- .ctors         0x0000122c        0x4 con_seq.o
- .ctors         0x00001230        0x4 console.o
+ .ctors         0x0000125c        0x4 impossible_mode.o
+ .ctors         0x00001260        0x4 con_anim.o
+ .ctors         0x00001264        0x4 con_event.o
+ .ctors         0x00001268        0x4 con_evt.o
+ .ctors         0x0000126c        0x4 con_mario.o
+ .ctors         0x00001270        0x4 con_perf.o
+ .ctors         0x00001274        0x4 con_seq.o
+ .ctors         0x00001278        0x4 console.o
  *(SORT_BY_NAME(.ctors.*))
  *(.ctors)
-                0x00001240                        . = ALIGN (0x20)
- *fill*         0x00001234        0xc 
+                0x00001280                        . = ALIGN (0x20)
+ *fill*         0x0000127c        0x4 
 
-.dtors          0x00001240        0x0
+.dtors          0x00001280        0x0
  *crtbegin.o(.dtors)
  *(EXCLUDE_FILE(*crtend.o) .dtors)
  *(SORT_BY_NAME(.dtors.*))
  *(.dtors)
-                0x00001240                        . = ALIGN (0x20)
+                0x00001280                        . = ALIGN (0x20)
 
 .jcr
  *(.jcr)
@@ -805,17 +811,17 @@ Linker script and memory map
  *(.got.plt)
  *(.got)
 
-.sdata          0x00001240        0x0
+.sdata          0x00001280        0x0
                 [!provide]                        PROVIDE (_SDA_BASE_ = .)
  *(.sdata)
  *(.sdata.*)
  *(.gnu.linkonce.s.*)
-                0x00001240                        . = ALIGN (0x20)
-                0x00001240                        _edata = .
+                0x00001280                        . = ALIGN (0x20)
+                0x00001280                        _edata = .
                 [!provide]                        PROVIDE (edata = .)
 
-.sbss           0x00001240        0x0
-                0x00001240                        __sbss_start = .
+.sbss           0x00001280        0x0
+                0x00001280                        __sbss_start = .
                 [!provide]                        PROVIDE (__sbss_start = .)
                 [!provide]                        PROVIDE (___sbss_start = .)
  *(.dynsbss)
@@ -825,151 +831,151 @@ Linker script and memory map
  *(.scommon)
                 [!provide]                        PROVIDE (__sbss_end = .)
                 [!provide]                        PROVIDE (___sbss_end = .)
-                0x00001240                        . = ALIGN (0x20)
-                0x00001240                        __sbss_end = .
+                0x00001280                        . = ALIGN (0x20)
+                0x00001280                        __sbss_end = .
 
-.bss            0x00001240      0x320
-                0x00001240                        __bss_start = .
+.bss            0x00001280      0x320
+                0x00001280                        __bss_start = .
                 [!provide]                        PROVIDE (__bss_start = .)
  *(.dynbss)
  *(.bss)
  *(.bss.*)
- .bss._ZN3modL12mod_if_obj84E
-                0x00001240        0x8 impossible_mode.o
- .bss._ZN3modL12mod_if_obj46E
-                0x00001248        0x8 impossible_mode.o
- .bss.DisplayBuffer
-                0x00001250      0x100 impossible_mode.o
-                0x00001250                DisplayBuffer
+ .bss._ZN3modL13mod_if_obj112E
+                0x00001280        0x8 impossible_mode.o
  .bss._ZN3modL12mod_if_obj59E
-                0x00001350        0x8 con_anim.o
+                0x00001288        0x8 impossible_mode.o
+ .bss.DisplayBuffer
+                0x00001290      0x100 impossible_mode.o
+                0x00001290                DisplayBuffer
+ .bss._ZN3modL12mod_if_obj59E
+                0x00001390        0x8 con_anim.o
  .bss._ZN3mod7ap_viewE
-                0x00001358        0xc con_anim.o
-                0x00001358                _ZN3mod7ap_viewE
+                0x00001398        0xc con_anim.o
+                0x00001398                _ZN3mod7ap_viewE
  .bss._ZN3mod18ap_view_anim_cycleE
-                0x00001364       0x10 con_anim.o
-                0x00001364                _ZN3mod18ap_view_anim_cycleE
- .bss._ZN3mod15ap_view_anim_idE
-                0x00001374       0x10 con_anim.o
-                0x00001374                _ZN3mod15ap_view_anim_idE
- .bss._ZN3mod15ap_view_ry_rateE
-                0x00001384       0x10 con_anim.o
-                0x00001384                _ZN3mod15ap_view_ry_rateE
- .bss._ZN3mod10ap_view_ryE
-                0x00001394       0x10 con_anim.o
-                0x00001394                _ZN3mod10ap_view_ryE
- .bss._ZN3mod13ap_view_scaleE
                 0x000013a4       0x10 con_anim.o
-                0x000013a4                _ZN3mod13ap_view_scaleE
- .bss._ZN3mod10ap_view_tzE
+                0x000013a4                _ZN3mod18ap_view_anim_cycleE
+ .bss._ZN3mod15ap_view_anim_idE
                 0x000013b4       0x10 con_anim.o
-                0x000013b4                _ZN3mod10ap_view_tzE
- .bss._ZN3mod10ap_view_tyE
+                0x000013b4                _ZN3mod15ap_view_anim_idE
+ .bss._ZN3mod15ap_view_ry_rateE
                 0x000013c4       0x10 con_anim.o
-                0x000013c4                _ZN3mod10ap_view_tyE
- .bss._ZN3mod10ap_view_txE
+                0x000013c4                _ZN3mod15ap_view_ry_rateE
+ .bss._ZN3mod10ap_view_ryE
                 0x000013d4       0x10 con_anim.o
-                0x000013d4                _ZN3mod10ap_view_txE
- *fill*         0x000013e4        0x4 
+                0x000013d4                _ZN3mod10ap_view_ryE
+ .bss._ZN3mod13ap_view_scaleE
+                0x000013e4       0x10 con_anim.o
+                0x000013e4                _ZN3mod13ap_view_scaleE
+ .bss._ZN3mod10ap_view_tzE
+                0x000013f4       0x10 con_anim.o
+                0x000013f4                _ZN3mod10ap_view_tzE
+ .bss._ZN3mod10ap_view_tyE
+                0x00001404       0x10 con_anim.o
+                0x00001404                _ZN3mod10ap_view_tyE
+ .bss._ZN3mod10ap_view_txE
+                0x00001414       0x10 con_anim.o
+                0x00001414                _ZN3mod10ap_view_txE
+ *fill*         0x00001424        0x4 
  .bss._ZN3modL20gApViewLastAnimCycleE
-                0x000013e8        0x8 con_anim.o
+                0x00001428        0x8 con_anim.o
  .bss._ZN3mod10event_loadE
-                0x000013f0        0xc con_event.o
-                0x000013f0                _ZN3mod10event_loadE
+                0x00001430        0xc con_event.o
+                0x00001430                _ZN3mod10event_loadE
  .bss._ZN3modL12mod_if_obj88E
-                0x000013fc        0x8 con_evt.o
+                0x0000143c        0x8 con_evt.o
  .bss._ZN3modL12mod_if_obj13E
-                0x00001404        0x8 con_evt.o
+                0x00001444        0x8 con_evt.o
  .bss._ZN3mod14evt_show_tableE
-                0x0000140c       0x10 con_evt.o
-                0x0000140c                _ZN3mod14evt_show_tableE
+                0x0000144c       0x10 con_evt.o
+                0x0000144c                _ZN3mod14evt_show_tableE
  .bss._ZN3modL12mod_if_obj22E
-                0x0000141c        0x8 con_mario.o
+                0x0000145c        0x8 con_mario.o
  .bss._ZN3mod14mario_show_posE
-                0x00001424       0x10 con_mario.o
-                0x00001424                _ZN3mod14mario_show_posE
+                0x00001464       0x10 con_mario.o
+                0x00001464                _ZN3mod14mario_show_posE
  .bss._ZN3mod13mario_set_posE
-                0x00001434        0xc con_mario.o
-                0x00001434                _ZN3mod13mario_set_posE
+                0x00001474        0xc con_mario.o
+                0x00001474                _ZN3mod13mario_set_posE
  .bss._ZN3modL12mod_if_obj46E
-                0x00001440        0x8 con_perf.o
+                0x00001480        0x8 con_perf.o
  .bss._ZN3mod14mem_debug_heapE
-                0x00001448       0x10 con_perf.o
-                0x00001448                _ZN3mod14mem_debug_heapE
+                0x00001488       0x10 con_perf.o
+                0x00001488                _ZN3mod14mem_debug_heapE
  .bss._ZN3modL12mod_if_obj29E
-                0x00001458        0x8 con_perf.o
+                0x00001498        0x8 con_perf.o
  .bss._ZN3mod9perf_showE
-                0x00001460       0x10 con_perf.o
-                0x00001460                _ZN3mod9perf_showE
+                0x000014a0       0x10 con_perf.o
+                0x000014a0                _ZN3mod9perf_showE
  .bss._ZN3mod15perf_fake_spikeE
-                0x00001470        0xc con_perf.o
-                0x00001470                _ZN3mod15perf_fake_spikeE
+                0x000014b0        0xc con_perf.o
+                0x000014b0                _ZN3mod15perf_fake_spikeE
  .bss._ZN3mod14seq_change_mapE
-                0x0000147c        0xc con_seq.o
-                0x0000147c                _ZN3mod14seq_change_mapE
+                0x000014bc        0xc con_seq.o
+                0x000014bc                _ZN3mod14seq_change_mapE
  .bss._ZN3modL12mod_if_obj16E
-                0x00001488        0x8 con_seq.o
+                0x000014c8        0x8 con_seq.o
  .bss._ZN3mod24gTrampoline_seq_logoMainE
-                0x00001490        0x4 con_seq.o
-                0x00001490                _ZN3mod24gTrampoline_seq_logoMainE
+                0x000014d0        0x4 con_seq.o
+                0x000014d0                _ZN3mod24gTrampoline_seq_logoMainE
  .bss._ZN3mod13seq_logo_skipE
-                0x00001494       0x10 con_seq.o
-                0x00001494                _ZN3mod13seq_logo_skipE
+                0x000014d4       0x10 con_seq.o
+                0x000014d4                _ZN3mod13seq_logo_skipE
  .bss._ZN3mod4findE
-                0x000014a4        0xc console.o
-                0x000014a4                _ZN3mod4findE
+                0x000014e4        0xc console.o
+                0x000014e4                _ZN3mod4findE
  .bss._ZN3mod11con_ug_chanE
-                0x000014b0       0x10 console.o
-                0x000014b0                _ZN3mod11con_ug_chanE
- .bss._ZN3mod11con_ug_modeE
-                0x000014c0       0x10 console.o
-                0x000014c0                _ZN3mod11con_ug_modeE
- .bss._ZN3mod21con_log_fade_durationE
-                0x000014d0       0x10 console.o
-                0x000014d0                _ZN3mod21con_log_fade_durationE
- .bss._ZN3mod18con_log_fade_startE
-                0x000014e0       0x10 console.o
-                0x000014e0                _ZN3mod18con_log_fade_startE
- .bss._ZN3mod12con_log_fadeE
                 0x000014f0       0x10 console.o
-                0x000014f0                _ZN3mod12con_log_fadeE
- .bss._ZN3mod13con_log_levelE
+                0x000014f0                _ZN3mod11con_ug_chanE
+ .bss._ZN3mod11con_ug_modeE
                 0x00001500       0x10 console.o
-                0x00001500                _ZN3mod13con_log_levelE
- .bss._ZN3mod11con_rainbowE
+                0x00001500                _ZN3mod11con_ug_modeE
+ .bss._ZN3mod21con_log_fade_durationE
                 0x00001510       0x10 console.o
-                0x00001510                _ZN3mod11con_rainbowE
- .bss._ZN3mod8con_monoE
+                0x00001510                _ZN3mod21con_log_fade_durationE
+ .bss._ZN3mod18con_log_fade_startE
                 0x00001520       0x10 console.o
-                0x00001520                _ZN3mod8con_monoE
- .bss._ZN3mod8con_showE
+                0x00001520                _ZN3mod18con_log_fade_startE
+ .bss._ZN3mod12con_log_fadeE
                 0x00001530       0x10 console.o
-                0x00001530                _ZN3mod8con_showE
+                0x00001530                _ZN3mod12con_log_fadeE
+ .bss._ZN3mod13con_log_levelE
+                0x00001540       0x10 console.o
+                0x00001540                _ZN3mod13con_log_levelE
+ .bss._ZN3mod11con_rainbowE
+                0x00001550       0x10 console.o
+                0x00001550                _ZN3mod11con_rainbowE
+ .bss._ZN3mod8con_monoE
+                0x00001560       0x10 console.o
+                0x00001560                _ZN3mod8con_monoE
+ .bss._ZN3mod8con_showE
+                0x00001570       0x10 console.o
+                0x00001570                _ZN3mod8con_showE
  .bss._ZN3mod8gConsoleE
-                0x00001540        0x4 console.o
-                0x00001540                _ZN3mod8gConsoleE
+                0x00001580        0x4 console.o
+                0x00001580                _ZN3mod8gConsoleE
  .bss._ZN3mod9ConIntVar6sFirstE
-                0x00001544        0x4 console.o
-                0x00001544                _ZN3mod9ConIntVar6sFirstE
+                0x00001584        0x4 console.o
+                0x00001584                _ZN3mod9ConIntVar6sFirstE
  .bss._ZN3mod10ConCommand6sFirstE
-                0x00001548        0x4 console.o
-                0x00001548                _ZN3mod10ConCommand6sFirstE
+                0x00001588        0x4 console.o
+                0x00001588                _ZN3mod10ConCommand6sFirstE
  .bss._ZN3mod4gModE
-                0x0000154c        0x4 mod.o
-                0x0000154c                _ZN3mod4gModE
+                0x0000158c        0x4 mod.o
+                0x0000158c                _ZN3mod4gModE
  .bss._ZN17ModUpdateFunction6sFirstE
-                0x00001550        0x4 mod.o
-                0x00001550                _ZN17ModUpdateFunction6sFirstE
+                0x00001590        0x4 mod.o
+                0x00001590                _ZN17ModUpdateFunction6sFirstE
  .bss._ZN15ModInitFunction6sFirstE
-                0x00001554        0x4 mod.o
-                0x00001554                _ZN15ModInitFunction6sFirstE
+                0x00001594        0x4 mod.o
+                0x00001594                _ZN15ModInitFunction6sFirstE
  *(.gnu.linkonce.b.*)
  *(COMMON)
-                0x00001560                        . = ALIGN (0x20)
- *fill*         0x00001558        0x8 
+                0x000015a0                        . = ALIGN (0x20)
+ *fill*         0x00001598        0x8 
                 [!provide]                        PROVIDE (__bss_end = .)
-                0x00001560                        __bss_end = .
-                0x00001560                        _end = .
+                0x000015a0                        __bss_end = .
+                0x000015a0                        _end = .
                 [!provide]                        PROVIDE (end = .)
 
 .bss._ZZNK3mod14seq_change_mapMUlPKcE_clES2_E8beroName
@@ -1085,134 +1091,134 @@ Linker script and memory map
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000      0x4a0
+.debug_aranges  0x00000000      0x4b0
  *(.debug_aranges)
  .debug_aranges
-                0x00000000       0x38 impossible_mode.o
+                0x00000000       0x48 impossible_mode.o
  .debug_aranges
-                0x00000038       0x48 common_ui.o
+                0x00000048       0x48 common_ui.o
  .debug_aranges
-                0x00000080       0x38 con_anim.o
+                0x00000090       0x38 con_anim.o
  .debug_aranges
-                0x000000b8       0x30 con_event.o
+                0x000000c8       0x30 con_event.o
  .debug_aranges
-                0x000000e8       0x40 con_evt.o
+                0x000000f8       0x40 con_evt.o
  .debug_aranges
-                0x00000128       0x30 con_mario.o
+                0x00000138       0x30 con_mario.o
  .debug_aranges
-                0x00000158       0x38 con_perf.o
+                0x00000168       0x38 con_perf.o
  .debug_aranges
-                0x00000190       0x38 con_seq.o
+                0x000001a0       0x38 con_seq.o
  .debug_aranges
-                0x000001c8       0xa8 console.o
+                0x000001d8       0xa8 console.o
  .debug_aranges
-                0x00000270       0x38 cxx.o
+                0x00000280       0x38 cxx.o
  .debug_aranges
-                0x000002a8       0x40 keyboard.o
+                0x000002b8       0x40 keyboard.o
  .debug_aranges
-                0x000002e8       0x58 mod.o
+                0x000002f8       0x58 mod.o
  .debug_aranges
-                0x00000340       0x50 patch.o
+                0x00000350       0x50 patch.o
  .debug_aranges
-                0x00000390       0x48 patches_core.o
+                0x000003a0       0x48 patches_core.o
  .debug_aranges
-                0x000003d8       0x30 rel.o
+                0x000003e8       0x30 rel.o
  .debug_aranges
-                0x00000408       0x40 reload.o
+                0x00000418       0x40 reload.o
  .debug_aranges
-                0x00000448       0x38 ug.o
+                0x00000458       0x38 ug.o
  .debug_aranges
-                0x00000480       0x20 util.o
+                0x00000490       0x20 util.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000    0x18786
+.debug_info     0x00000000    0x189e0
  *(.debug_info)
- .debug_info    0x00000000     0x1039 impossible_mode.o
- .debug_info    0x00001039      0xdac common_ui.o
- .debug_info    0x00001de5     0x2396 con_anim.o
- .debug_info    0x0000417b     0x19f9 con_event.o
- .debug_info    0x00005b74     0x19f5 con_evt.o
- .debug_info    0x00007569     0x21f8 con_mario.o
- .debug_info    0x00009761     0x1f5d con_perf.o
- .debug_info    0x0000b6be     0x1f4c con_seq.o
- .debug_info    0x0000d60a     0x387d console.o
- .debug_info    0x00010e87      0x47c cxx.o
- .debug_info    0x00011303      0xd68 keyboard.o
- .debug_info    0x0001206b     0x2b80 mod.o
- .debug_info    0x00014beb      0xc16 patch.o
- .debug_info    0x00015801     0x1475 patches_core.o
- .debug_info    0x00016c76      0x103 rel.o
- .debug_info    0x00016d79      0xc71 reload.o
- .debug_info    0x000179ea      0x88b ug.o
- .debug_info    0x00018275      0x511 util.o
+ .debug_info    0x00000000     0x1293 impossible_mode.o
+ .debug_info    0x00001293      0xdac common_ui.o
+ .debug_info    0x0000203f     0x2396 con_anim.o
+ .debug_info    0x000043d5     0x19f9 con_event.o
+ .debug_info    0x00005dce     0x19f5 con_evt.o
+ .debug_info    0x000077c3     0x21f8 con_mario.o
+ .debug_info    0x000099bb     0x1f5d con_perf.o
+ .debug_info    0x0000b918     0x1f4c con_seq.o
+ .debug_info    0x0000d864     0x387d console.o
+ .debug_info    0x000110e1      0x47c cxx.o
+ .debug_info    0x0001155d      0xd68 keyboard.o
+ .debug_info    0x000122c5     0x2b80 mod.o
+ .debug_info    0x00014e45      0xc16 patch.o
+ .debug_info    0x00015a5b     0x1475 patches_core.o
+ .debug_info    0x00016ed0      0x103 rel.o
+ .debug_info    0x00016fd3      0xc71 reload.o
+ .debug_info    0x00017c44      0x88b ug.o
+ .debug_info    0x000184cf      0x511 util.o
 
-.debug_abbrev   0x00000000     0x4e13
+.debug_abbrev   0x00000000     0x4e64
  *(.debug_abbrev)
- .debug_abbrev  0x00000000      0x3f5 impossible_mode.o
- .debug_abbrev  0x000003f5      0x2f2 common_ui.o
- .debug_abbrev  0x000006e7      0x6a1 con_anim.o
- .debug_abbrev  0x00000d88      0x4da con_event.o
- .debug_abbrev  0x00001262      0x559 con_evt.o
- .debug_abbrev  0x000017bb      0x5dd con_mario.o
- .debug_abbrev  0x00001d98      0x6aa con_perf.o
- .debug_abbrev  0x00002442      0x697 con_seq.o
- .debug_abbrev  0x00002ad9      0x97b console.o
- .debug_abbrev  0x00003454      0x16f cxx.o
- .debug_abbrev  0x000035c3      0x3bd keyboard.o
- .debug_abbrev  0x00003980      0x701 mod.o
- .debug_abbrev  0x00004081      0x2eb patch.o
- .debug_abbrev  0x0000436c      0x3b6 patches_core.o
- .debug_abbrev  0x00004722       0xf0 rel.o
- .debug_abbrev  0x00004812      0x30f reload.o
- .debug_abbrev  0x00004b21      0x1be ug.o
- .debug_abbrev  0x00004cdf      0x134 util.o
+ .debug_abbrev  0x00000000      0x446 impossible_mode.o
+ .debug_abbrev  0x00000446      0x2f2 common_ui.o
+ .debug_abbrev  0x00000738      0x6a1 con_anim.o
+ .debug_abbrev  0x00000dd9      0x4da con_event.o
+ .debug_abbrev  0x000012b3      0x559 con_evt.o
+ .debug_abbrev  0x0000180c      0x5dd con_mario.o
+ .debug_abbrev  0x00001de9      0x6aa con_perf.o
+ .debug_abbrev  0x00002493      0x697 con_seq.o
+ .debug_abbrev  0x00002b2a      0x97b console.o
+ .debug_abbrev  0x000034a5      0x16f cxx.o
+ .debug_abbrev  0x00003614      0x3bd keyboard.o
+ .debug_abbrev  0x000039d1      0x701 mod.o
+ .debug_abbrev  0x000040d2      0x2eb patch.o
+ .debug_abbrev  0x000043bd      0x3b6 patches_core.o
+ .debug_abbrev  0x00004773       0xf0 rel.o
+ .debug_abbrev  0x00004863      0x30f reload.o
+ .debug_abbrev  0x00004b72      0x1be ug.o
+ .debug_abbrev  0x00004d30      0x134 util.o
 
-.debug_line     0x00000000     0x7322
+.debug_line     0x00000000     0x73ea
  *(.debug_line)
- .debug_line    0x00000000      0x639 impossible_mode.o
- .debug_line    0x00000639      0x5ad common_ui.o
- .debug_line    0x00000be6      0x941 con_anim.o
- .debug_line    0x00001527      0x68d con_event.o
- .debug_line    0x00001bb4      0x624 con_evt.o
- .debug_line    0x000021d8      0x568 con_mario.o
- .debug_line    0x00002740      0x75f con_perf.o
- .debug_line    0x00002e9f      0x622 con_seq.o
- .debug_line    0x000034c1     0x143d console.o
- .debug_line    0x000048fe      0x264 cxx.o
- .debug_line    0x00004b62      0x620 keyboard.o
- .debug_line    0x00005182      0x738 mod.o
- .debug_line    0x000058ba      0x518 patch.o
- .debug_line    0x00005dd2      0x623 patches_core.o
- .debug_line    0x000063f5      0x154 rel.o
- .debug_line    0x00006549      0x6eb reload.o
- .debug_line    0x00006c34      0x403 ug.o
- .debug_line    0x00007037      0x2eb util.o
+ .debug_line    0x00000000      0x701 impossible_mode.o
+ .debug_line    0x00000701      0x5ad common_ui.o
+ .debug_line    0x00000cae      0x941 con_anim.o
+ .debug_line    0x000015ef      0x68d con_event.o
+ .debug_line    0x00001c7c      0x624 con_evt.o
+ .debug_line    0x000022a0      0x568 con_mario.o
+ .debug_line    0x00002808      0x75f con_perf.o
+ .debug_line    0x00002f67      0x622 con_seq.o
+ .debug_line    0x00003589     0x143d console.o
+ .debug_line    0x000049c6      0x264 cxx.o
+ .debug_line    0x00004c2a      0x620 keyboard.o
+ .debug_line    0x0000524a      0x738 mod.o
+ .debug_line    0x00005982      0x518 patch.o
+ .debug_line    0x00005e9a      0x623 patches_core.o
+ .debug_line    0x000064bd      0x154 rel.o
+ .debug_line    0x00006611      0x6eb reload.o
+ .debug_line    0x00006cfc      0x403 ug.o
+ .debug_line    0x000070ff      0x2eb util.o
 
 .debug_frame
  *(.debug_frame)
 
-.debug_str      0x00000000    0x1286b
+.debug_str      0x00000000    0x12960
  *(.debug_str)
- .debug_str     0x00000000      0xd0a impossible_mode.o
- .debug_str     0x00000d0a      0x7d7 common_ui.o
- .debug_str     0x000014e1     0x17e9 con_anim.o
- .debug_str     0x00002cca     0x16bc con_event.o
- .debug_str     0x00004386     0x158e con_evt.o
- .debug_str     0x00005914     0x19e9 con_mario.o
- .debug_str     0x000072fd     0x168c con_perf.o
- .debug_str     0x00008989     0x1770 con_seq.o
- .debug_str     0x0000a0f9     0x1b1e console.o
- .debug_str     0x0000bc17      0x46a cxx.o
- .debug_str     0x0000c081      0xaad keyboard.o
- .debug_str     0x0000cb2e     0x2da4 mod.o
- .debug_str     0x0000f8d2      0x7ae patch.o
- .debug_str     0x00010080      0xfd3 patches_core.o
- .debug_str     0x00011053      0x1ab rel.o
- .debug_str     0x000111fe      0xd26 reload.o
- .debug_str     0x00011f24      0x4b7 ug.o
- .debug_str     0x000123db      0x490 util.o
+ .debug_str     0x00000000      0xdff impossible_mode.o
+ .debug_str     0x00000dff      0x7d7 common_ui.o
+ .debug_str     0x000015d6     0x17e9 con_anim.o
+ .debug_str     0x00002dbf     0x16bc con_event.o
+ .debug_str     0x0000447b     0x158e con_evt.o
+ .debug_str     0x00005a09     0x19e9 con_mario.o
+ .debug_str     0x000073f2     0x168c con_perf.o
+ .debug_str     0x00008a7e     0x1770 con_seq.o
+ .debug_str     0x0000a1ee     0x1b1e console.o
+ .debug_str     0x0000bd0c      0x46a cxx.o
+ .debug_str     0x0000c176      0xaad keyboard.o
+ .debug_str     0x0000cc23     0x2da4 mod.o
+ .debug_str     0x0000f9c7      0x7ae patch.o
+ .debug_str     0x00010175      0xfd3 patches_core.o
+ .debug_str     0x00011148      0x1ab rel.o
+ .debug_str     0x000112f3      0xd26 reload.o
+ .debug_str     0x00012019      0x4b7 ug.o
+ .debug_str     0x000124d0      0x490 util.o
 
 .debug_loc
  *(.debug_loc)
@@ -1232,11 +1238,11 @@ Linker script and memory map
 .debug_varnames
  *(.debug_varnames)
                 0x00000000                        __isIPL = 0x0
-                0x00021560                        __stack_addr = ((((__bss_start + SIZEOF (.bss)) + 0x20000) + 0x7) & 0xfffffffffffffff8)
-                0x00001560                        __stack_end = (__bss_start + SIZEOF (.bss))
-                0x00025560                        __intrstack_addr = (__stack_addr + 0x4000)
-                0x00021560                        __intrstack_end = __stack_addr
-                0x00025560                        __Arena1Lo = ((__intrstack_addr + 0x1f) & 0xffffffffffffffe0)
+                0x000215a0                        __stack_addr = ((((__bss_start + SIZEOF (.bss)) + 0x20000) + 0x7) & 0xfffffffffffffff8)
+                0x000015a0                        __stack_end = (__bss_start + SIZEOF (.bss))
+                0x000255a0                        __intrstack_addr = (__stack_addr + 0x4000)
+                0x000215a0                        __intrstack_end = __stack_addr
+                0x000255a0                        __Arena1Lo = ((__intrstack_addr + 0x1f) & 0xffffffffffffffe0)
                 0x817feff0                        __Arena1Hi = 0x817feff0
                 0x817ff000                        __gxregs = ((__Arena1Hi + 0x1f) & 0xffffffffffffffe0)
                 [!provide]                        PROVIDE (__stack = 0x817feff0)
@@ -1249,10 +1255,10 @@ Linker script and memory map
                 [!provide]                        PROVIDE (__Arena1Hi = __Arena1Hi)
                 [!provide]                        PROVIDE (__gxregs = __gxregs)
 LOAD C:/Users/Rainchus/Desktop/TTYD_Modding/ttyd-tools/rel/source/base/cxx.ld
-                0x00001214                        _ctors_start = ADDR (.ctors)
-                0x00001240                        _ctors_end = (_ctors_start + SIZEOF (.ctors))
-                0x00001240                        _dtors_start = ADDR (.dtors)
-                0x00001240                        _dtors_end = (_dtors_start + SIZEOF (.dtors))
+                0x0000125c                        _ctors_start = ADDR (.ctors)
+                0x00001280                        _ctors_end = (_ctors_start + SIZEOF (.ctors))
+                0x00001280                        _dtors_start = ADDR (.dtors)
+                0x00001280                        _dtors_end = (_dtors_start + SIZEOF (.dtors))
 LOAD impossible_mode.o
 LOAD common_ui.o
 LOAD con_anim.o
@@ -1279,79 +1285,79 @@ LOAD C:/devkitPro/devkitPPC/bin/../lib/gcc/powerpc-eabi/13.1.0\libgcc.a
 OUTPUT(C:/Users/Rainchus/Desktop/TTYD_Modding/ttyd-tools/rel/rel.us.elf elf32-powerpc)
 
 .debug_loclists
-                0x00000000     0x2c56
+                0x00000000     0x2c75
  .debug_loclists
-                0x00000000       0x6d impossible_mode.o
+                0x00000000       0x8c impossible_mode.o
  .debug_loclists
-                0x0000006d      0x4f5 common_ui.o
+                0x0000008c      0x4f5 common_ui.o
  .debug_loclists
-                0x00000562      0x313 con_anim.o
+                0x00000581      0x313 con_anim.o
  .debug_loclists
-                0x00000875      0x281 con_event.o
+                0x00000894      0x281 con_event.o
  .debug_loclists
-                0x00000af6      0x1f3 con_evt.o
+                0x00000b15      0x1f3 con_evt.o
  .debug_loclists
-                0x00000ce9       0xa9 con_mario.o
+                0x00000d08       0xa9 con_mario.o
  .debug_loclists
-                0x00000d92      0x2aa con_perf.o
+                0x00000db1      0x2aa con_perf.o
  .debug_loclists
-                0x0000103c       0xf4 con_seq.o
+                0x0000105b       0xf4 con_seq.o
  .debug_loclists
-                0x00001130      0xe8f console.o
+                0x0000114f      0xe8f console.o
  .debug_loclists
-                0x00001fbf       0x54 cxx.o
+                0x00001fde       0x54 cxx.o
  .debug_loclists
-                0x00002013      0x176 keyboard.o
+                0x00002032      0x176 keyboard.o
  .debug_loclists
-                0x00002189      0x122 mod.o
+                0x000021a8      0x122 mod.o
  .debug_loclists
-                0x000022ab      0x445 patch.o
+                0x000022ca      0x445 patch.o
  .debug_loclists
-                0x000026f0       0x58 patches_core.o
+                0x0000270f       0x58 patches_core.o
  .debug_loclists
-                0x00002748       0x4d rel.o
+                0x00002767       0x4d rel.o
  .debug_loclists
-                0x00002795      0x29f reload.o
+                0x000027b4      0x29f reload.o
  .debug_loclists
-                0x00002a34      0x1a2 ug.o
+                0x00002a53      0x1a2 ug.o
  .debug_loclists
-                0x00002bd6       0x80 util.o
+                0x00002bf5       0x80 util.o
 
 .debug_rnglists
-                0x00000000      0xabf
+                0x00000000      0xadb
  .debug_rnglists
-                0x00000000       0x3f impossible_mode.o
+                0x00000000       0x5b impossible_mode.o
  .debug_rnglists
-                0x0000003f       0x6a common_ui.o
+                0x0000005b       0x6a common_ui.o
  .debug_rnglists
-                0x000000a9       0xf4 con_anim.o
+                0x000000c5       0xf4 con_anim.o
  .debug_rnglists
-                0x0000019d       0x95 con_event.o
+                0x000001b9       0x95 con_event.o
  .debug_rnglists
-                0x00000232       0xb0 con_evt.o
+                0x0000024e       0xb0 con_evt.o
  .debug_rnglists
-                0x000002e2       0x6e con_mario.o
+                0x000002fe       0x6e con_mario.o
  .debug_rnglists
-                0x00000350       0xc5 con_perf.o
+                0x0000036c       0xc5 con_perf.o
  .debug_rnglists
-                0x00000415       0xcc con_seq.o
+                0x00000431       0xcc con_seq.o
  .debug_rnglists
-                0x000004e1      0x31f console.o
+                0x000004fd      0x31f console.o
  .debug_rnglists
-                0x00000800       0x25 cxx.o
+                0x0000081c       0x25 cxx.o
  .debug_rnglists
-                0x00000825       0xa4 keyboard.o
+                0x00000841       0xa4 keyboard.o
  .debug_rnglists
-                0x000008c9       0x78 mod.o
+                0x000008e5       0x78 mod.o
  .debug_rnglists
-                0x00000941       0x6b patch.o
+                0x0000095d       0x6b patch.o
  .debug_rnglists
-                0x000009ac       0x41 patches_core.o
+                0x000009c8       0x41 patches_core.o
  .debug_rnglists
-                0x000009ed       0x3d rel.o
+                0x00000a09       0x3d rel.o
  .debug_rnglists
-                0x00000a2a       0x2d reload.o
+                0x00000a46       0x2d reload.o
  .debug_rnglists
-                0x00000a57       0x39 ug.o
+                0x00000a73       0x39 ug.o
  .debug_rnglists
-                0x00000a90       0x2f util.o
+                0x00000aac       0x2f util.o

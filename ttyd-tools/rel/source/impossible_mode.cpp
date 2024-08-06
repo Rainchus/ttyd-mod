@@ -1,4 +1,5 @@
 #include "impossible_mode.h"
+#include "ttyd/mario_pouch.h"
 
 #define FALSE 0
 #define TRUE 1
@@ -11,7 +12,7 @@ namespace mod {
 
 extern "C" {
 s32 HP_Multiplier = 150;
-s32 Atk_Multiplier = 300;
+s32 Atk_Multiplier = 100;
 }
 
 void drawModMain(void) {
@@ -21,6 +22,7 @@ void drawModMain(void) {
     f32 yPos = -185;
 
     if (mario_st->bInBattle == TRUE) {
+
         sprintf(tempDisplayBuffer,"Hp:  %.1fx", HP_Multiplier/100.0f);
         DrawText(tempDisplayBuffer, xPos, yPos, 255, true, ~0U, 0.75f, /* alignment = center */ 4);
 
@@ -43,6 +45,17 @@ extern "C" {
     void end_enemy_atk();
 }
 
+void TattleAllEnemies(void) {
+    //063DAFBC
+    mod::patch::writePatch(reinterpret_cast<void*>(0x803DAFBC),0xF8000000U);
+    mod::patch::writePatch(reinterpret_cast<void*>(0x803DAFC0),0xFFFFFFFEU);
+    mod::patch::writePatch(reinterpret_cast<void*>(0x803DAFC4),0xFFFFFFFFU);
+    mod::patch::writePatch(reinterpret_cast<void*>(0x803DAFC8),0xFFFFC3FFU);
+    mod::patch::writePatch(reinterpret_cast<void*>(0x803DAFCC),0xFFFFFFFFU);
+    mod::patch::writePatch(reinterpret_cast<void*>(0x803DAFD0),0xFFFFFFFFU);
+    mod::patch::writePatch(reinterpret_cast<void*>(0x803DAFD4),0x0F80003FU);
+}
+
 MOD_INIT_FUNCTION() {
     //auto mash text with Y holding
     mod::patch::writePatch(reinterpret_cast<void*>(0x80080FCC),0x4BF84061U);
@@ -58,6 +71,7 @@ MOD_INIT_FUNCTION() {
     mod::patch::writePatch(reinterpret_cast<void*>(0x80005048),0x48000F38U);
     mod::patch::writePatch(reinterpret_cast<void*>(0x802EE018),0x0A090800U); //remove normal guard window
     
+    mod::TattleAllEnemies(); //why does this not work
 
     //modify enemy hp as they spawn in patch 1
     mod::patch::writeBranchPair(
@@ -67,11 +81,11 @@ MOD_INIT_FUNCTION() {
         reinterpret_cast<void*>(end_enemy_hp));
 
     //related to modify enemy hp...what does this do?
-    // mod::patch::writeBranchPair(
-    //     reinterpret_cast<void*>(start_enemy_hp_2_BH),
-    //     reinterpret_cast<void*>(start_enemy_hp_2_EH),
-    //     reinterpret_cast<void*>(start_enemy_hp_2),
-    //     reinterpret_cast<void*>(end_enemy_hp_2));
+    mod::patch::writeBranchPair(
+        reinterpret_cast<void*>(start_enemy_hp_2_BH),
+        reinterpret_cast<void*>(start_enemy_hp_2_EH),
+        reinterpret_cast<void*>(start_enemy_hp_2),
+        reinterpret_cast<void*>(end_enemy_hp_2));
 
     mod::patch::writeBranchPair(
         reinterpret_cast<void*>(start_enemy_atk_BH),
@@ -81,7 +95,22 @@ MOD_INIT_FUNCTION() {
 
 }
 
+void GiveAndEquipPeekaboo(void) {
+    #define kItemPeekaboo 0x135
+    s32 peekabooInBadgesResult = ttyd::mario_pouch::pouchCheckItem(kItemPeekaboo);
+
+    if (peekabooInBadgesResult == FALSE) {
+        ttyd::mario_pouch::pouchGetItem(kItemPeekaboo);
+    }
+
+    s32 peekabooEquippedResult = ttyd::mario_pouch::pouchEquipCheckBadge(kItemPeekaboo); //peekaboo result
+    if (peekabooEquippedResult == FALSE) {
+        ttyd::mario_pouch::pouchEquipBadgeID(kItemPeekaboo);
+    }
+}
+
 MOD_UPDATE_FUNCTION() {
+    mod::GiveAndEquipPeekaboo();
 }
 
 }

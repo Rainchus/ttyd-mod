@@ -16,7 +16,7 @@ start_enemy_hp:
     bgt- loc_0x48
 
     mr %r3, %r6
-    //convert hp int to float
+
     lis %r4, HP_Multiplier@ha
     lwz %r4, HP_Multiplier@l(%r4)
 
