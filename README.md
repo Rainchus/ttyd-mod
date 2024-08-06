@@ -1,6 +1,11 @@
 # TTYD++
 A mod of the thousand year door to shorten the cutscenes/dialog for better replayability
 
+### Credits
+* **PistonMiner** for the TTYD scripting disassembly tool, ttydasm. (GitHub repo [here](https://github.com/PistonMiner/ttyd-tools).)
+* PistonMiner and **Zephiles** for their contributions to the symbol maps, including nearly all of the main binary's .text symbols.
+* Both of the above, **Jasper**, **SolidifiedGaming**, and others who've helped with TTYD documentation elsewhere.
+
 # Environment for building gci mods for TTYD
 Download and install https://gnuwin32.sourceforge.net/downlinks/make.php
 
