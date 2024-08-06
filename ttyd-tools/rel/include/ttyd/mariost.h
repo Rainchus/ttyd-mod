@@ -1,7 +1,5 @@
 #pragma once
-
 #include <gc/types.h>
-
 #include <cstdint>
 
 namespace gc::OSLink {
@@ -9,7 +7,7 @@ struct OSModuleInfo;
 }
 
 namespace ttyd::mariost {
-    
+
 struct MarioSt_Globals {
     uint32_t    flags;
     uint32_t    fps;
@@ -82,7 +80,6 @@ static_assert(sizeof(MarioSt_Globals) == 0x13d8);
 	
 extern "C" {
 
-// .text
 void marioStInit();
 void marioStMain();
 void marioStDisp();
@@ -92,9 +89,11 @@ void viPostCallback(uint32_t retraceCount);
 void gcDvdCheckThread();
 void gcRumbleCheck();
 
+
 // .data
 extern MarioSt_Globals* g_MarioSt;
-
+extern void *globalWorkPointer;
+extern int32_t _mariostSystemLevel;
 }
 
 }

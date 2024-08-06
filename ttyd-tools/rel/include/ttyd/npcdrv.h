@@ -5,10 +5,6 @@
 
 #include <cstdint>
 
-namespace ttyd::battle_database_common {
-struct BattleGroupSetup;
-}
-
 namespace ttyd::npcdrv {
 
 struct NpcEntry;
@@ -60,7 +56,7 @@ struct NpcBattleInfo
 	uint32_t wItemDropped;
 	uint32_t wHeartsDroppedBaseCount;
 	uint32_t wFlowersDroppedBaseCount;
-	battle_database_common::BattleGroupSetup *pConfiguration;
+	void *pConfiguration; // Reference to unimplemented type BattleSetupConfiguration
 	uint32_t wHeldItems[8];
 	uint32_t *pItemDropLists[8];
 	int32_t wStolenItems[8];
@@ -92,35 +88,11 @@ enum class NpcTerritoryType : int32_t
 	kSquare = 0x2,
 };
 
-struct NpcSetupInfo {
-    const char* nameJp;
-    uint32_t    flags;
-    uint32_t    reactionFlags;
-    void*       initEvtCode;
-    void*       regularEvtCode;
-    void*       talkEvtCode;
-    void*       deadEvtCode;
-    void*       findEvtCode;
-    void*       lostEvtCode;
-    void*       returnEvtCode;
-    void*       blowEvtCode;
-    NpcTerritoryType territoryType;
-    gc::vec3    territoryBase;
-    gc::vec3    territoryLoiter;
-    float       searchRange;
-    float       searchAngle;
-    float       homingRange;
-    float       homingAngle;
-    int32_t     battleInfoId;
-}  __attribute__((__packed__));
-
-static_assert(sizeof(NpcSetupInfo) == 0x5c);
-
 struct NpcEntry
 {
 	uint32_t flags;
 	uint32_t reactionFlags;
-	char wUnkAnimation[32];
+	char name[32];
 	NpcTribeDescription *tribe;
 	char currentAnimation[32];
 	char stayAnimation[32];
@@ -241,13 +213,17 @@ struct FbatBattleInformation
 	uint32_t wMode;
 	uint32_t wParty;
 	uint32_t wFirstAttack;
-    NpcBattleInfo* wBattleInfo;
+
+	uint8_t gap_c[0x4];
+
 	uint32_t wResult;
 	int32_t wCoinDropCount;
-    uint8_t wBtlActRecCondition;
+
+	uint8_t gap_18[0x1];
+
 	uint8_t wRuleKeepResult;
-    uint8_t wBtlActRecParam0;
-    uint8_t wBtlActRecParam1;
+
+	uint8_t gap_1a[0x2];
 } __attribute__((__packed__));
 
 static_assert(sizeof(FbatBattleInformation) == 0x1c);
@@ -277,7 +253,7 @@ static_assert(sizeof(FbatAttackAnnounceInfo) == 0x20);
 struct FbatData
 {
 	int16_t mode;
-	uint8_t state;
+	uint8_t field_2;
 
 	uint8_t gap_3[0x1];
 

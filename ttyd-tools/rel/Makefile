@@ -11,6 +11,10 @@ ifeq ($(strip $(TTYDTOOLS)),)
 $(error "Please set TTYDTOOLS in your environment. export TTYDTOOLS=<path to>ttyd-tools")
 endif
 
+ifeq ($(strip $(GCI_PATH)),)
+$(error "Please set GCI_PATH in your environment. export GCI_PATH=<path_to_dolphin_gci>")
+endif
+
 include $(DEVKITPPC)/gamecube_rules
 
 export ELF2REL	:=	$(TTYDTOOLS)/bin/elf2rel

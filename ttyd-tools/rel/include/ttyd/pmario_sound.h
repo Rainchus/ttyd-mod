@@ -7,9 +7,9 @@ namespace ttyd::pmario_sound {
 extern "C" {
 
 // psndENV_LPF
-// psndENVOff_f_d
-// psndENVOff
-// psndENVOn_f_d
+bool psndENVOff_f_d(int32_t flags, int32_t wFadeTime, bool unused);
+bool psndENVOff(int32_t flags);
+bool psndENVOn_f_d(int32_t flags, const char *envName, int32_t wFadeTime, bool unused);
 // psndENVOn
 // psndENVMain
 // psndENV_stop
@@ -32,11 +32,9 @@ extern "C" {
 // psndBGMScope
 // psndBGMChkSilent
 // psndBGMChk
-// psndBGMOff_f_d
-// psndBGMOff
-uint32_t psndBGMOn_f_d(
-    uint32_t unk0, const char* name, uint32_t fadein_time, uint16_t unk1);
-// unk_800db778
+bool psndBGMOff_f_d(int32_t flags, uint16_t fadeTime, bool unkSwitch);
+bool psndBGMOff(int32_t flags);
+bool psndBGMOn_f_d(int32_t flags, const char *bgmName, uint16_t wFadeTime, uint16_t wFadeTime2, bool unused);
 // psndBGMOn
 // psndBGMMain
 // psndBGM_rate
@@ -44,14 +42,14 @@ uint32_t psndBGMOn_f_d(
 // psndSFXAllOff
 // psndMapChange
 // psndGetFlag
-// psndClearFlag
+void psndClearFlag(uint16_t unkBit);
 // psndSetFlag
 // psndSetReverb
-void psndStopAllFadeOut();
+// psndStopAllFadeOut
 // psndSetPosDirListener
 // psndPushGroup
-// psndExit
-// psndMainInt
+void psndExit();
+void psndMainInt();
 // psndMain
 // psndInit
 // searchPSSFXList

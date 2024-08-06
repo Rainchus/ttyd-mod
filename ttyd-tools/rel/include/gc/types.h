@@ -9,14 +9,14 @@ struct vec3
 	float x, y, z;
 } __attribute__((__packed__));
 
-struct mtx34
+struct mat3x4
 {
-    float m[3][4];
+	float a[12];
 } __attribute__((__packed__));
 
-struct mtx44
+struct mat4x4
 {
-    float m[4][4];
+	float a[16];
 } __attribute__((__packed__));
 
 struct color4
