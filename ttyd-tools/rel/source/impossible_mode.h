@@ -39,11 +39,14 @@ void reloadRoomMain(void);
 extern const int32_t swSet_BH = 0x800858FC;
 extern const int32_t swSet_EH = 0x80085900;
 
-extern const int32_t start_enemy_hp_BH = 0x80129248;
-extern const int32_t start_enemy_hp_EH = 0x8012924C;
+extern const int32_t start_enemy_hp_BH = 0x80129244;
+extern const int32_t start_enemy_hp_EH = 0x80129264;
 
-extern const int32_t start_enemy_hp_2_BH = 0x8012925C;
-extern const int32_t start_enemy_hp_2_EH = 0x80129260;
+// extern const int32_t start_enemy_hp_BH = 0x80129248;
+// extern const int32_t start_enemy_hp_EH = 0x8012924C;
+
+// extern const int32_t start_enemy_hp_2_BH = 0x8012925C;
+// extern const int32_t start_enemy_hp_2_EH = 0x80129260;
 
 extern const int32_t start_enemy_atk_BH = 0x800FD890;
 extern const int32_t end_enemy_atk_EH = 0x800FD894;
